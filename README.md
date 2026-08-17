@@ -1,2 +1,61 @@
-# PROJETO-INTEGRADOR
-Para o projeto final do curso
+# 📚MOCAU
+
+## 📖 Sobre
+
+
+## 👥 Integrantes
+
+- Aira Soares
+- Alan Kauan
+- Beatriz Coutinho
+- Carlos Eduardo
+- Carlos Henrique
+- Cauan Abraão
+- Dennys Ricardo
+- Eduardo Vieira
+- Gabriel Felipe
+- George Lucas
+- Heloisa Vieira
+- Jéssica Silva
+- João Lucas
+- João Pedro 
+- Kauã André
+- Laura Sofia
+- Luísa Melo
+- Luiz Miranda
+- Maria Eduarda 
+- Maria Regina 
+- Pedro Martins
+- Pedro Philipe
+- Pedro Vitor
+- Raimundo Anthoni
+- Ramon de Oliveira
+- Raquel Moreira
+
+## 💻 Tecnologias
+
+- HTML
+- CSS
+
+## 🚀 Como Executar
+
+1. Baixe o projeto para o seu computador.
+2. Abra a pasta no VS Code.
+3. Abra o arquivo `index.html`.
+4. Execute o arquivo no navegador.
+
+## 📋 Board do Projeto
+
+Acompanhe as tarefas, atividades e o andamento do projeto através da nossa Board.
+
+🔗 **[Acessar a Board do Projeto]()**  
+
+## 📁 Estrutura do Projeto
+
+```text
+Turma-125/
+├── index.html
+├── style.css
+
+
+
