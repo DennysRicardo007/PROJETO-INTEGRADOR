@@ -53,9 +53,9 @@ Acompanhe as tarefas, atividades e o andamento do projeto através da nossa Boar
 ## 📁 Estrutura do Projeto
 
 ```text
-Turma-125/
-├── index.html
-├── style.css
+MOCAU
+├── 
+├── 
 
 
 
