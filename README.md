@@ -12,6 +12,7 @@
 - Carlos Henrique
 - Cauan Abraão
 - Dennys Ricardo
+- Elcio josé
 - Eduardo Vieira
 - Gabriel Felipe
 - George Lucas
