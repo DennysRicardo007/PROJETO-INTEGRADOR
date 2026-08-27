@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOCAU</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app" id="app">
+
+    <!-- MENU LATERAL -->
+    <div class="menu-lateral">
+      <button class="menu-fechar" onclick="fecharMenu()">&#10005;</button>
+
+      <ul class="menu-lista">
+        <li>Perfil</li>
+        <li>Suporte</li>
+        <li>Sair</li>
+      </ul>
+
+      <hr class="divisor">
+    </div>
+
+    <!-- OVERLAY para fechar o menu ao clicar fora -->
+    <div class="overlay" onclick="fecharMenu()"></div>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="conteudo">
+
+      <div class="header">
+        <button class="menu-icon" onclick="abrirMenu()">&#9776;</button>
+        <div class="logo">MOCAU</div>
+        <img class="avatar" src="https://i.pravatar.cc/100" alt="avatar">
+      </div>
+
+      <div class="saudacao">Olá, Maria</div>
+
+      <div class="banner-comunidade">
+        <div class="banner-texto">
+          <strong>Sua Comunidade:</strong>
+          <span>Rua Açuper - Alto Santa Terezinha, 131</span>
+        </div>
+        <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=200" alt="comunidade">
+      </div>
+
+      <div class="grid-botoes">
+        <button class="botao mapa">
+          <div class="icone">&#128506;</div>
+          <div class="label">Mapa</div>
+        </button>
+
+        <button class="botao registrar">
+          <div class="icone">&#10133;</div>
+          <div class="label">Registrar</div>
+        </button>
+
+        <button class="botao historico">
+          <div class="icone">&#8635;</div>
+          <div class="label">Historico</div>
+        </button>
+
+        <button class="botao comunidade">
+          <div class="icone">&#128101;</div>
+          <div class="label">Comunidade</div>
+        </button>
+      </div>
+
+      <div class="ocorrencias-titulo">Ocorrencias perto de você</div>
+
+      <div class="ocorrencia agua">
+        <div class="ocorrencia-info">
+          <div class="ocorrencia-icone">&#128167;</div>
+          <div class="ocorrencia-texto">
+            <span>Rua Açuper - Alto Santa Terezinha, 331</span>
+          </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=200" alt="local">
+      </div>
+
+      <div class="ocorrencia vazamento">
+        <div class="ocorrencia-info">
+          <div class="ocorrencia-icone">&#128704;</div>
+          <div class="ocorrencia-texto">
+            <strong>Vazamento de água</strong>
+            <span>Rua Açuper - Alto Santa Terezinha, 331</span>
+          </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=200" alt="local">
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

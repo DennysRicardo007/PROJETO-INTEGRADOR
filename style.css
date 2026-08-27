@@ -1,0 +1,236 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+}
+
+.app {
+  position: relative;
+  width: 375px;
+  height: 100vh;
+  background-color: #ffffff;
+  overflow: hidden; /* esconde o menu quando ele estiver fora da tela */
+}
+
+/* ===== CONTEÚDO PRINCIPAL (HOME) ===== */
+.conteudo {
+  padding: 20px 18px;
+  height: 100%;
+  overflow-y: auto;
+  transition: transform 0.3s ease;
+}
+
+/* quando o menu estiver aberto, empurra/opaca o conteúdo */
+.app.menu-aberto .conteudo {
+  transform: translateX(30%);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.menu-icon {
+  font-size: 24px;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #ddd;
+}
+
+.saudacao {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.banner-comunidade {
+  background-color: #a9c3f5;
+  border-radius: 16px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.banner-texto strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.banner-texto span {
+  font-size: 13px;
+  color: #1a1a1a;
+}
+
+.banner-comunidade img {
+  width: 60px;
+  height: 45px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.grid-botoes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.botao {
+  border-radius: 16px;
+  padding: 24px 10px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+}
+
+.botao .icone {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.botao .label {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.botao.mapa { background-color: #34c165; color: #063d13; }
+.botao.registrar { background-color: #2fa9f0; color: #06304a; }
+.botao.historico { background-color: #f5a623; color: #4a2e00; }
+.botao.comunidade { background-color: #dceaff; color: #10233d; }
+
+.ocorrencias-titulo {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.ocorrencia {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+}
+
+.ocorrencia.agua { background-color: #e3d9fb; }
+.ocorrencia.vazamento { background-color: #f5f5f5; border: 1px solid #eee; }
+
+.ocorrencia-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ocorrencia-icone { font-size: 20px; }
+
+.ocorrencia-texto strong {
+  display: block;
+  font-size: 13px;
+}
+
+.ocorrencia-texto span {
+  font-size: 12px;
+  color: #555;
+}
+
+.ocorrencia img {
+  width: 55px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* ===== MENU LATERAL ===== */
+.menu-lateral {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100%;
+  background-color: #dbeeff;
+  border-right: 2px solid #3b9cff;
+  padding: 20px 15px;
+  transform: translateX(-100%); /* começa escondido fora da tela */
+  transition: transform 0.3s ease;
+  z-index: 10;
+}
+
+.app.menu-aberto .menu-lateral {
+  transform: translateX(0); /* desliza para dentro da tela */
+}
+
+.menu-fechar {
+  font-size: 22px;
+  cursor: pointer;
+  margin-bottom: 40px;
+  background: none;
+  border: none;
+}
+
+.menu-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-lista li {
+  padding: 10px 0;
+  font-size: 16px;
+  color: #222;
+  cursor: pointer;
+}
+
+.menu-lista li:hover {
+  font-weight: bold;
+}
+
+.divisor {
+  border: none;
+  border-top: 1px dashed #3b9cff;
+  margin: 30px 0;
+}
+
+/* ===== OVERLAY (escurece o fundo quando o menu está aberto) ===== */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 5;
+}
+
+.app.menu-aberto .overlay {
+  opacity: 1;
+  pointer-events: auto; /* permite clicar fora do menu para fechar */
+}
