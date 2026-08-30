@@ -1,0 +1,172 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    background-color: #eef2f5;
+    display: flex;
+    justify-content: center;
+}
+
+.app {
+    width: 100%;
+    max-width: 400px;
+    min-height: 100vh;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-bottom: 90px;
+}
+
+.cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+}
+
+.cabecalho h1 {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #222;
+}
+
+.botao-voltar {
+    text-decoration: none;
+    font-size: 22px;
+    color: #333;
+}
+
+.foto-perfil {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px #ddd;
+}
+
+.comunidade {
+    background-color: #4a9de8;
+    background: linear-gradient(135deg, #5aa9f0, #3d8fe0);
+    border-radius: 16px;
+    margin: 0 16px 16px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+}
+
+.comunidade-info h2 {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.comunidade-info p {
+    font-size: 12px;
+    opacity: 0.95;
+    max-width: 180px;
+}
+
+.comunidade img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.mapa {
+    position: relative;
+    margin: 0 16px 16px;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.mapa img {
+    width: 100%;
+    height: 620px;
+    object-fit: cover;
+    display: block;
+}
+
+.marcador {
+    position: absolute;
+    font-size: 26px;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3));
+}
+
+.marcador.falta-agua {
+    top: 20%;
+    left: 30%;
+}
+
+.marcador.vazamento {
+    top: 55%;
+    left: 55%;
+}
+
+.legenda {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 8px 16px 16px;
+    margin-top: auto; 
+}
+
+.legenda-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #333;
+}
+
+.legenda-item .icone {
+    font-size: 18px;
+}
+
+.navegacao {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 400px;
+    background-color: #d7e9fb;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 8px 14px;
+}
+
+.navegacao-item {
+    text-decoration: none;
+    color: #4a6a8a;
+    text-align: center;
+    font-size: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.navegacao-item span {
+    font-size: 18px;
+}
+
+.navegacao-item.ativo {
+    color: #1a56db;
+    font-weight: 600;
+}
+
+.navegacao-item p {
+    margin: 0;
+}
