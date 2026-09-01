@@ -37,7 +37,7 @@
 
 - HTML
 - CSS
-- JAVA SCRIPT
+- JAVASCRIPT
 
 ## 🚀 Como Executar
 
