@@ -28,9 +28,9 @@
         <div class="overlay" onclick="fecharMenu()"></div>
 
         <header class="cabecalho">
-            <a href="#" class="botao-voltar">←</a>
+            <a href="#" class="botao-voltar" onclick="window.location.href='home.html'">←</a>
             <h1>MAPA</h1>
-            <img src="img/perfil.png" alt="Foto do perfil" class="foto-perfil">
+            <img src="img/avatar-usuario.png" alt="Foto do perfil" class="foto-perfil">
         </header>
 
         <section class="comunidade">
@@ -38,12 +38,24 @@
                 <h2>Sua Comunidade:</h2>
                 <p>Rua Agupé - Alto Santa Terezinha, 131</p>
             </div>
-            <img src="img/comunidade.png" alt="Ilustração da comunidade">
+            <img src="img/mapa.png" alt="Ilustração da comunidade">
         </section>
 
            <div id="map"></div>
             <script src="js/maps.js" defer></script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnpiQr72AlwUZdjTjtPVqQtsDtJz3r-H4&callback=initMap&loading=async" async defer></script>
+            <script>
+       
+                if (window.google && window.google.maps && window.initMap) {
+                    window.initMap();
+                } else {
+                 
+                    const script = document.createElement('script');
+                    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyC9nzASYGMofI7E05pkNt1-XmCFY3QGNR8&callback=initMap&loading=async';
+                    script.async = true;
+                    script.defer = true;
+                    document.head.appendChild(script);
+                }
+            </script>
 
         <section class="legenda">
             <div class="legenda-item">
