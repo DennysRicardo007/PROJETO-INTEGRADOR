@@ -1,7 +1,7 @@
 {
-  "name": "agua-app",
+  "name": "MOCAU",
   "version": "1.0.0",
-  "description": "App para reportar ocorrências de água",
+  "description": "App para reportar ocorrências relacionadas à água em comunidades locais, permitindo que os usuários registrem problemas como vazamentos, falta de abastecimento e contaminação da água. O aplicativo visa melhorar a gestão dos recursos hídricos e promover a conscientização sobre a importância da água potável.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

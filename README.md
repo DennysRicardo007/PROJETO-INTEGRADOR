@@ -2,6 +2,7 @@
 
 ## 📖 Sobre
 
+AVISO: A API DO GOOOGLE MAPS RODA APENAS NO NODE 24.16.0.
 
 ## 👥 Integrantes
 
