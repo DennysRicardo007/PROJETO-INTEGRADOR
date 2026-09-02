@@ -1,35 +1,220 @@
 // ==========================================================================
 // nova-ocorrencia.js — Lógica da tela "Confirmar local" do MOCAL
-// Mapa real com Leaflet + tiles do OpenStreetMap (sem chave de API).
-// JavaScript puro, sem frameworks/bibliotecas de UI.
+// Mapa real com a Google Maps JavaScript API + Geocoding API.
+// Segue o mesmo padrão de carregamento usado em js/maps.js (tela Mapa):
+// o script da API é injetado direto no HTML, com callback global.
 // ==========================================================================
 
+let mapa = null;
+let geocoder = null;
+let mapaJaCarregado = false;
+
+let atualizandoEnderecoTimeout = null;
+let ultimaRequisicaoId = 0;
+
+// Local inicial padrão, caso o navegador negue/não tenha geolocalização
+// (bairro Alto Santa Terezinha, Recife - PE, aproximado).
+const COORDENADA_PADRAO = { lat: -8.0330, lng: -34.9060 };
+const ZOOM_PADRAO = 17;
+const CHAVE_LOCAL_STORAGE = 'mocal_endereco_selecionado';
+
+let coordenadaSelecionada = COORDENADA_PADRAO;
+
+// --- Inicialização do mapa (chamada pelo callback do script da Google Maps) ----
+
+function iniciarMapaOcorrencia() {
+  console.log('Inicializando mapa de confirmação de local...');
+
+  mapa = new google.maps.Map(document.getElementById('mapa'), {
+    zoom: ZOOM_PADRAO,
+    center: coordenadaSelecionada,
+    disableDefaultUI: true,
+    zoomControl: true,
+    clickableIcons: false,
+    gestureHandling: 'greedy' // permite arrastar com 1 dedo no mobile
+  });
+
+  geocoder = new google.maps.Geocoder();
+  mapaJaCarregado = true;
+
+  // O pino fica fixo no centro da tela (ver CSS .pino-mapa); o usuário
+  // arrasta o MAPA por baixo dele para escolher o local, como em
+  // Uber/99/Google Maps ao confirmar um endereço.
+  mapa.addListener('idle', function () {
+    const centro = mapa.getCenter();
+    coordenadaSelecionada = { lat: centro.lat(), lng: centro.lng() };
+    agendarBuscaDeEndereco(coordenadaSelecionada);
+  });
+
+  mapa.addListener('tilesloaded', esconderCarregandoMapa);
+
+  // Busca o endereço do ponto inicial assim que o mapa é criado.
+  agendarBuscaDeEndereco(coordenadaSelecionada, 0);
+
+  // Assim que o mapa estiver pronto, tenta recentralizar na localização
+  // real do usuário (não bloqueia a criação do mapa, que já usa o local
+  // padrão enquanto isso).
+  tentarCentralizarNaLocalizacaoDoUsuario();
+
+  console.log('✅ Mapa de confirmação de local inicializado com sucesso');
+}
+
+window.iniciarMapaOcorrencia = iniciarMapaOcorrencia;
+
+// Reinicializa/redimensiona o mapa quando a página volta a ficar visível
+// (mesmo comportamento usado em js/maps.js na tela Mapa).
+document.addEventListener('visibilitychange', function () {
+  if (!document.hidden && mapaJaCarregado && mapa) {
+    console.log('Página voltou a ficar visível');
+    google.maps.event.trigger(mapa, 'resize');
+  }
+});
+
+// Tenta inicializar se o script da Google Maps já tiver carregado antes
+// deste arquivo (ex: cache do navegador).
 document.addEventListener('DOMContentLoaded', function () {
+  if (window.google && window.google.maps && !mapaJaCarregado) {
+    iniciarMapaOcorrencia();
+  }
+});
 
-  const CHAVE_LOCAL_STORAGE = 'mocal_endereco_selecionado';
+function esconderCarregandoMapa() {
+  const elMapaCarregando = document.getElementById('mapaCarregando');
+  if (elMapaCarregando) {
+    elMapaCarregando.classList.add('oculto');
+  }
+}
 
-  // Local inicial padrão, caso o navegador negue/não tenha geolocalização
-  // (bairro Alto Santa Terezinha, Recife - PE, aproximado).
-  const COORDENADA_PADRAO = { lat: -8.0330, lng: -34.9060 };
-  const ZOOM_PADRAO = 17;
-
-  // Nominatim (OpenStreetMap) é gratuito, mas tem limite de ~1 requisição/s
-  // e não deve ser usado em produção com alto volume sem um proxy próprio
-  // ou um provedor de geocodificação dedicado (ver documentação de uso justo
-  // do OSM: https://operations.osmfoundation.org/policies/nominatim/).
-  const URL_REVERSE_GEOCODE = 'https://nominatim.openstreetmap.org/reverse';
-
-  let mapa = null;
-  let atualizandoEnderecoTimeout = null;
-  let ultimaRequisicaoId = 0;
-  let coordenadaSelecionada = COORDENADA_PADRAO;
-
+function mostrarErroDeMapa(mensagem) {
   const elMapaCarregando = document.getElementById('mapaCarregando');
   const elBotaoRecarregar = document.getElementById('botaoRecarregarMapa');
+
+  if (elMapaCarregando) {
+    elMapaCarregando.querySelector('span').textContent = mensagem;
+    elMapaCarregando.classList.remove('oculto');
+  }
+  if (elBotaoRecarregar) {
+    elBotaoRecarregar.classList.add('visivel');
+  }
+}
+
+// Callback global chamado pela própria API do Google quando a chave é
+// inválida, tem restrições incompatíveis, ou o faturamento está inativo.
+window.gm_authFailure = function () {
+  mostrarErroDeMapa('Chave da API do Google Maps inválida ou sem permissão.');
+};
+
+// --- Geocodificação reversa (coordenadas -> endereço legível) ---------------
+
+function agendarBuscaDeEndereco(coordenada, atraso) {
+  const elEnderecoLinha2 = document.getElementById('enderecoLinha2');
+  if (elEnderecoLinha2) {
+    elEnderecoLinha2.textContent = 'Atualizando endereço…';
+  }
+
+  window.clearTimeout(atualizandoEnderecoTimeout);
+  atualizandoEnderecoTimeout = window.setTimeout(function () {
+    buscarEnderecoPorCoordenada(coordenada);
+  }, atraso === undefined ? 500 : atraso); // debounce: evita 1 requisição por pixel arrastado
+}
+
+function buscarEnderecoPorCoordenada(coordenada) {
+  if (!geocoder) {
+    return;
+  }
+
+  const idRequisicaoAtual = ++ultimaRequisicaoId;
+
+  geocoder.geocode({ location: coordenada }, function (resultados, status) {
+    // Ignora respostas de requisições antigas (usuário já moveu o mapa de novo)
+    if (idRequisicaoAtual !== ultimaRequisicaoId) {
+      return;
+    }
+
+    const elEnderecoLinha2 = document.getElementById('enderecoLinha2');
+
+    if (status !== 'OK' || !resultados || !resultados.length) {
+      console.warn('Geocodificação reversa falhou:', status);
+      if (elEnderecoLinha2) {
+        elEnderecoLinha2.textContent = 'Não foi possível identificar o endereço automaticamente';
+      }
+      return;
+    }
+
+    preencherEnderecoComResultado(resultados[0]);
+  });
+}
+
+function preencherEnderecoComResultado(resultado) {
+  const componentes = resultado.address_components || [];
+
+  function pegarComponente(tipo) {
+    const encontrado = componentes.find(function (c) {
+      return c.types.indexOf(tipo) !== -1;
+    });
+    return encontrado ? encontrado.long_name : '';
+  }
+
+  const via = pegarComponente('route');
+  const numero = pegarComponente('street_number');
+  const bairro = pegarComponente('sublocality') || pegarComponente('neighborhood');
+  const cidade = pegarComponente('administrative_area_level_2') || pegarComponente('locality');
+  const estado = pegarComponente('administrative_area_level_1');
+
+  const linha1 = via
+    ? (via + (numero ? (', ' + numero) : ''))
+    : (resultado.formatted_address ? resultado.formatted_address.split(',')[0] : 'Local selecionado');
+
+  const partesLinha2 = [bairro, [cidade, estado].filter(Boolean).join(' - ')]
+    .filter(Boolean);
+
   const elEnderecoLinha1 = document.getElementById('enderecoLinha1');
   const elEnderecoLinha2 = document.getElementById('enderecoLinha2');
 
-  // --- Botão voltar ----------------------------------------------------------
+  if (elEnderecoLinha1) {
+    elEnderecoLinha1.textContent = linha1;
+  }
+  if (elEnderecoLinha2) {
+    elEnderecoLinha2.textContent = partesLinha2.length
+      ? partesLinha2.join(' • ')
+      : 'Endereço aproximado';
+  }
+}
+
+// --- Geolocalização do usuário -----------------------------------------------
+
+function tentarCentralizarNaLocalizacaoDoUsuario() {
+  if (!('geolocation' in navigator)) {
+    console.warn('Geolocalização não é suportada neste dispositivo.');
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    function (posicao) {
+      const coordenada = {
+        lat: posicao.coords.latitude,
+        lng: posicao.coords.longitude
+      };
+      coordenadaSelecionada = coordenada;
+
+      if (mapa) {
+        mapa.setCenter(coordenada);
+        mapa.setZoom(ZOOM_PADRAO);
+        // O evento 'idle' cuidará de rebuscar o endereço automaticamente.
+      }
+    },
+    function (erro) {
+      console.warn('Não foi possível obter a localização automaticamente:', erro.message);
+    },
+    { enableHighAccuracy: true, timeout: 8000 }
+  );
+}
+
+// --- Interações da tela (rodam assim que o DOM estiver pronto) ----------------
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  // --- Botão voltar -----------------------------------------------------------
   const botaoVoltar = document.getElementById('botaoVoltar');
 
   if (botaoVoltar) {
@@ -42,210 +227,76 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // --- Inicialização do mapa ---------------------------------------------------
+  // --- Tentar novamente (falha ao carregar o mapa) -----------------------------
+  const botaoRecarregar = document.getElementById('botaoRecarregarMapa');
 
-  function iniciarMapa(coordenadaInicial) {
-    if (typeof L === 'undefined') {
-      mostrarErroDeMapa('Não foi possível carregar o mapa.');
-      return;
-    }
-
-    if (mapa) {
-      mapa.setView([coordenadaInicial.lat, coordenadaInicial.lng], ZOOM_PADRAO);
-      return;
-    }
-
-    mapa = L.map('mapa', {
-      center: [coordenadaInicial.lat, coordenadaInicial.lng],
-      zoom: ZOOM_PADRAO,
-      zoomControl: true,
-      attributionControl: true
-    });
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">colaboradores do OpenStreetMap</a>'
-    }).addTo(mapa);
-
-    // O pino fica fixo no centro da tela (ver CSS .pino-mapa); o usuário
-    // arrasta o MAPA por baixo dele para escolher o local, como em
-    // Uber/99/Google Maps ao confirmar um endereço.
-    mapa.on('moveend', function () {
-      const centro = mapa.getCenter();
-      coordenadaSelecionada = { lat: centro.lat, lng: centro.lng };
-      agendarBuscaDeEndereco(coordenadaSelecionada);
-    });
-
-    mapa.on('load', esconderCarregandoMapa);
-
-    // 'load' só dispara em alguns casos; garante que o overlay some assim
-    // que os tiles começarem a aparecer.
-    mapa.whenReady(function () {
-      window.setTimeout(esconderCarregandoMapa, 150);
-    });
-
-    // Busca o endereço do ponto inicial assim que o mapa é criado.
-    agendarBuscaDeEndereco(coordenadaInicial, 0);
-  }
-
-  function esconderCarregandoMapa() {
-    if (elMapaCarregando) {
-      elMapaCarregando.classList.add('oculto');
-    }
-  }
-
-  function mostrarErroDeMapa(mensagem) {
-    if (elMapaCarregando) {
-      elMapaCarregando.querySelector('span').textContent = mensagem;
-      elMapaCarregando.classList.remove('oculto');
-    }
-    if (elBotaoRecarregar) {
-      elBotaoRecarregar.classList.add('visivel');
-    }
-  }
-
-  // --- Geocodificação reversa (coordenadas -> endereço legível) ------------------
-
-  function agendarBuscaDeEndereco(coordenada, atraso) {
-    if (elEnderecoLinha2) {
-      elEnderecoLinha2.textContent = 'Atualizando endereço…';
-    }
-
-    window.clearTimeout(atualizandoEnderecoTimeout);
-    atualizandoEnderecoTimeout = window.setTimeout(function () {
-      buscarEnderecoPorCoordenada(coordenada);
-    }, atraso === undefined ? 500 : atraso); // debounce: evita 1 requisição por pixel arrastado
-  }
-
-  function buscarEnderecoPorCoordenada(coordenada) {
-    const idRequisicaoAtual = ++ultimaRequisicaoId;
-    const url = URL_REVERSE_GEOCODE +
-      '?format=jsonv2&lat=' + encodeURIComponent(coordenada.lat) +
-      '&lon=' + encodeURIComponent(coordenada.lng) +
-      '&zoom=18&addressdetails=1';
-
-    fetch(url, { headers: { 'Accept': 'application/json' } })
-      .then(function (resposta) {
-        if (!resposta.ok) {
-          throw new Error('Falha na geocodificação reversa: ' + resposta.status);
-        }
-        return resposta.json();
-      })
-      .then(function (dados) {
-        // Ignora respostas de requisições antigas (usuário já moveu o mapa de novo)
-        if (idRequisicaoAtual !== ultimaRequisicaoId) {
-          return;
-        }
-        preencherEnderecoComResultado(dados);
-      })
-      .catch(function (erro) {
-        if (idRequisicaoAtual !== ultimaRequisicaoId) {
-          return;
-        }
-        console.warn('Não foi possível obter o endereço:', erro.message);
-        if (elEnderecoLinha2) {
-          elEnderecoLinha2.textContent = 'Não foi possível identificar o endereço automaticamente';
-        }
-      });
-  }
-
-  function preencherEnderecoComResultado(dados) {
-    const endereco = (dados && dados.address) || {};
-
-    const via = endereco.road || endereco.pedestrian || endereco.residential || '';
-    const numero = endereco.house_number ? (', ' + endereco.house_number) : '';
-    const bairro = endereco.suburb || endereco.neighbourhood || endereco.quarter || '';
-
-    const linha1 = via
-      ? (via + numero)
-      : (dados.display_name ? dados.display_name.split(',')[0] : 'Local selecionado');
-
-    const cidade = endereco.city || endereco.town || endereco.municipality || '';
-    const estado = endereco.state || '';
-
-    const partesLinha2 = [bairro, [cidade, estado].filter(Boolean).join(' - ')]
-      .filter(Boolean);
-
-    if (elEnderecoLinha1) {
-      elEnderecoLinha1.textContent = linha1;
-    }
-    if (elEnderecoLinha2) {
-      elEnderecoLinha2.textContent = partesLinha2.length
-        ? partesLinha2.join(' • ')
-        : 'Endereço aproximado';
-    }
-  }
-
-  // --- Tentar novamente (falha ao carregar o mapa) --------------------------------
-
-  if (elBotaoRecarregar) {
-    elBotaoRecarregar.addEventListener('click', function () {
-      elBotaoRecarregar.classList.remove('visivel');
+  if (botaoRecarregar) {
+    botaoRecarregar.addEventListener('click', function () {
+      botaoRecarregar.classList.remove('visivel');
+      const elMapaCarregando = document.getElementById('mapaCarregando');
       if (elMapaCarregando) {
         elMapaCarregando.querySelector('span').textContent = 'Carregando mapa…';
         elMapaCarregando.classList.remove('oculto');
       }
-      iniciarMapa(coordenadaSelecionada);
+
+      if (window.google && window.google.maps) {
+        iniciarMapaOcorrencia();
+      } else {
+        window.location.reload();
+      }
     });
   }
 
-  // --- Usar minha localização ------------------------------------------------------
-
+  // --- Usar minha localização ---------------------------------------------------
   const botaoLocalizacao = document.getElementById('botaoLocalizacao');
-
-  function irParaLocalizacaoAtual(aoConcluir) {
-    if (!('geolocation' in navigator)) {
-      console.warn('Geolocalização não é suportada neste dispositivo.');
-      if (aoConcluir) aoConcluir();
-      return;
-    }
-
-    navigator.geolocation.getCurrentPosition(
-      function (posicao) {
-        const coordenada = {
-          lat: posicao.coords.latitude,
-          lng: posicao.coords.longitude
-        };
-        coordenadaSelecionada = coordenada;
-
-        if (mapa) {
-          mapa.setView([coordenada.lat, coordenada.lng], ZOOM_PADRAO);
-          // moveend cuidará de rebuscar o endereço; ainda assim buscamos
-          // imediatamente para não depender apenas do evento de animação.
-          agendarBuscaDeEndereco(coordenada, 0);
-        }
-
-        if (aoConcluir) aoConcluir();
-      },
-      function (erro) {
-        console.warn('Não foi possível obter a localização:', erro.message);
-        if (aoConcluir) aoConcluir();
-      },
-      { enableHighAccuracy: true, timeout: 8000 }
-    );
-  }
 
   if (botaoLocalizacao) {
     botaoLocalizacao.addEventListener('click', function () {
       const rotuloBotao = botaoLocalizacao.querySelector('span:last-child');
       const textoOriginal = rotuloBotao.textContent;
 
+      if (!('geolocation' in navigator)) {
+        console.warn('Geolocalização não é suportada neste dispositivo.');
+        return;
+      }
+
       botaoLocalizacao.disabled = true;
       rotuloBotao.textContent = 'Localizando...';
 
-      irParaLocalizacaoAtual(function () {
-        botaoLocalizacao.disabled = false;
-        rotuloBotao.textContent = textoOriginal;
-      });
+      navigator.geolocation.getCurrentPosition(
+        function (posicao) {
+          const coordenada = {
+            lat: posicao.coords.latitude,
+            lng: posicao.coords.longitude
+          };
+          coordenadaSelecionada = coordenada;
+
+          if (mapa) {
+            mapa.setCenter(coordenada);
+            mapa.setZoom(ZOOM_PADRAO);
+          }
+
+          botaoLocalizacao.disabled = false;
+          rotuloBotao.textContent = textoOriginal;
+        },
+        function (erro) {
+          console.warn('Não foi possível obter a localização:', erro.message);
+          botaoLocalizacao.disabled = false;
+          rotuloBotao.textContent = textoOriginal;
+        },
+        { enableHighAccuracy: true, timeout: 8000 }
+      );
     });
   }
 
   // --- Próximo -------------------------------------------------------------------
-
   const botaoProximo = document.getElementById('botaoProximo');
 
   if (botaoProximo) {
     botaoProximo.addEventListener('click', function () {
+      const elEnderecoLinha1 = document.getElementById('enderecoLinha1');
+      const elEnderecoLinha2 = document.getElementById('enderecoLinha2');
+
       const endereco = {
         linha1: elEnderecoLinha1 ? elEnderecoLinha1.textContent.trim() : '',
         linha2: elEnderecoLinha2 ? elEnderecoLinha2.textContent.trim() : '',
@@ -264,27 +315,6 @@ document.addEventListener('DOMContentLoaded', function () {
       // (ex: tela de detalhes/foto da ocorrência) quando ela existir.
       window.location.href = 'detalhes-ocorrencia.html';
     });
-  }
-
-  // --- Ponto de partida: tenta geolocalização do usuário; se negar/falhar,
-  //     usa a coordenada padrão do bairro. ------------------------------------
-
-  if ('geolocation' in navigator) {
-    navigator.geolocation.getCurrentPosition(
-      function (posicao) {
-        coordenadaSelecionada = {
-          lat: posicao.coords.latitude,
-          lng: posicao.coords.longitude
-        };
-        iniciarMapa(coordenadaSelecionada);
-      },
-      function () {
-        iniciarMapa(COORDENADA_PADRAO);
-      },
-      { enableHighAccuracy: true, timeout: 5000 }
-    );
-  } else {
-    iniciarMapa(COORDENADA_PADRAO);
   }
 
 });

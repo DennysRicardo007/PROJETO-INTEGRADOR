@@ -135,13 +135,10 @@ button {
   height: 100%;
 }
 
-/* Leaflet cria seu próprio painel interno; garante que ele preencha o card
-   e respeite o border-radius definido em .mapa-preview. */
-.mapa .leaflet-container {
-  width: 100%;
-  height: 100%;
-  font-family: var(--fonte-base);
-  background: var(--cor-fundo-suave);
+/* O Google Maps injeta seus próprios elementos internos (div.gm-style);
+   isso só garante que eles herdem o border-radius do card. */
+.mapa > div {
+  border-radius: inherit;
 }
 
 .mapa-carregando {

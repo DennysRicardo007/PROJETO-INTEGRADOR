@@ -5,14 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MOCAL — Confirmar local</title>
 
-  <!-- Leaflet: biblioteca de mapa real, usando tiles do OpenStreetMap (gratuito, sem chave de API) -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-
   <link rel="stylesheet" href="css/mapa_ocorrencia.css">
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="js/mapa_ocorrencia.js" defer></script>
 </head>
 <body>
@@ -39,7 +33,7 @@
         <p class="subtitulo-local">Confirme o local no mapa</p>
 
         <div class="mapa-preview">
-          <!-- Mapa real (Leaflet + tiles do OpenStreetMap), inicializado em nova-ocorrencia.js -->
+          <!-- Mapa real (Google Maps JavaScript API), inicializado em nova-ocorrencia.js -->
           <div id="mapa" class="mapa" role="application" aria-label="Mapa interativo para confirmar o local da ocorrência"></div>
 
           <div class="mapa-carregando" id="mapaCarregando">
@@ -58,6 +52,22 @@
             </svg>
           </span>
         </div>
+
+        <script>
+          // Mesmo padrão de carregamento usado em mapa.html: se o script da
+          // Google Maps já tiver sido carregado por outra página/aba (cache),
+          // chama a inicialização direto; senão, injeta o script com a chave
+          // e o callback definidos em js/nova-ocorrencia.js.
+          if (window.google && window.google.maps && window.iniciarMapaOcorrencia) {
+            window.iniciarMapaOcorrencia();
+          } else {
+            const script = document.createElement('script');
+            script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyC9nzASYGMofI7E05pkNt1-XmCFY3QGNR8&callback=iniciarMapaOcorrencia&loading=async';
+            script.async = true;
+            script.defer = true;
+            document.head.appendChild(script);
+          }
+        </script>
 
         <div class="endereco" id="enderecoAtual">
           <p class="endereco-linha-1" id="enderecoLinha1">Carregando endereço…</p>
