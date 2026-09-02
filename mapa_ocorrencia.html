@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOCAL — Confirmar local</title>
+
+  <!-- Leaflet: biblioteca de mapa real, usando tiles do OpenStreetMap (gratuito, sem chave de API) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+
+  <link rel="stylesheet" href="css/mapa_ocorrencia.css">
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="js/mapa_ocorrencia.js" defer></script>
+</head>
+<body>
+
+  <div class="app">
+
+    <header class="cabecalho">
+      <button type="button" class="botao-voltar" id="botaoVoltar" aria-label="Voltar para a página anterior">
+        <!-- Ícone de seta: caractere temporário, pode ser substituído por SVG/PNG na pasta img -->
+        <span aria-hidden="true">&#8592;</span>
+      </button>
+
+      <h1 class="titulo-cabecalho">Registrar</h1>
+
+      <div class="avatar-usuario">
+        <img src="img/avatar-usuario.png" alt="Foto de perfil do usuário">
+      </div>
+    </header>
+
+    <main class="conteudo-principal">
+
+      <section class="secao-local" aria-labelledby="tituloLocal">
+        <h2 id="tituloLocal" class="titulo-local">Onde está acontecendo?</h2>
+        <p class="subtitulo-local">Confirme o local no mapa</p>
+
+        <div class="mapa-preview">
+          <!-- Mapa real (Leaflet + tiles do OpenStreetMap), inicializado em nova-ocorrencia.js -->
+          <div id="mapa" class="mapa" role="application" aria-label="Mapa interativo para confirmar o local da ocorrência"></div>
+
+          <div class="mapa-carregando" id="mapaCarregando">
+            <span>Carregando mapa…</span>
+          </div>
+
+          <button type="button" class="botao-recarregar-mapa" id="botaoRecarregarMapa">
+            Tentar novamente
+          </button>
+
+          <!-- Pino fixo no centro: o mapa se move por baixo dele (padrão Google Maps / Uber) -->
+          <span class="pino-mapa" aria-hidden="true">
+            <svg viewBox="0 0 24 32" width="34" height="44">
+              <path d="M12 0C5.4 0 0 5.4 0 12c0 9 12 20 12 20s12-11 12-20c0-6.6-5.4-12-12-12z" fill="#1E6FE0"/>
+              <circle cx="12" cy="12" r="5" fill="#ffffff"/>
+            </svg>
+          </span>
+        </div>
+
+        <div class="endereco" id="enderecoAtual">
+          <p class="endereco-linha-1" id="enderecoLinha1">Carregando endereço…</p>
+          <p class="endereco-linha-2" id="enderecoLinha2">Mova o mapa para ajustar o pino</p>
+        </div>
+
+        <button type="button" class="botao-localizacao" id="botaoLocalizacao">
+          <span class="icone-localizacao" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18">
+              <circle cx="12" cy="12" r="3" fill="currentColor"/>
+              <path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+          </span>
+          <span>Usar minha localização</span>
+        </button>
+
+        <button type="button" class="botao-proximo" id="botaoProximo">Próximo</button>
+
+      </section>
+
+    </main>
+
+    <nav class="menu-inferior" aria-label="Navegação principal">
+      <a href="mapa.html" class="item-menu">
+        <span class="icone-menu" aria-hidden="true">🗺️</span>
+        <span class="texto-menu">Mapa</span>
+      </a>
+
+      <a href="registrar.html" class="item-menu item-menu-ativo" aria-current="page">
+        <span class="icone-menu" aria-hidden="true">➕</span>
+        <span class="texto-menu">Registrar</span>
+      </a>
+
+      <a href="home.html" class="item-menu">
+        <span class="icone-menu" aria-hidden="true">🏠</span>
+        <span class="texto-menu">Início</span>
+      </a>
+
+      <!-- TODO: atualizar href quando historico.html for criado -->
+      <a href="#" class="item-menu">
+        <span class="icone-menu" aria-hidden="true">🕓</span>
+        <span class="texto-menu">Histórico</span>
+      </a>
+
+      <!-- TODO: atualizar href quando comunidade.html for criado -->
+      <a href="#" class="item-menu">
+        <span class="icone-menu" aria-hidden="true">👥</span>
+        <span class="texto-menu">Comunidade</span>
+      </a>
+    </nav>
+
+  </div>
+
+</body>
+</html>
