@@ -124,6 +124,19 @@ body {
     padding: 16px;
     background: #f5f6f8;
     border-radius: 14px;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+/* Estados da ocorrência principal conforme feedback */
+.ocorrencia-destaque.status-resolvida {
+    border-color: #0a7a3f;
+    background: #eafaf1;
+}
+
+.ocorrencia-destaque.status-adamento {
+    border-color: #b5660a;
+    background: #fff5e6;
 }
 
 .ocorrencia-destaque__icone {
@@ -169,6 +182,7 @@ body {
     border-radius: 999px;
     font-size: 11px;
     font-weight: 700;
+    transition: all 0.3s ease;
 }
 
 .selo-status--atendimento {
@@ -179,6 +193,22 @@ body {
 .selo-status--resolvido {
     background: #d4f5e3;
     color: #0a7a3f;
+}
+
+/* Selo da ocorrência principal - estados dinâmicos */
+.selo-status--principal {
+    background: #ffe3c2;
+    color: #b5660a;
+}
+
+.selo-status--principal.resolvida {
+    background: #d4f5e3;
+    color: #0a7a3f;
+}
+
+.selo-status--principal.adamento {
+    background: #ffe0e0;
+    color: #c0392b;
 }
 
 /* ===== SEÇÃO EXPANSÍVEL ===== */
@@ -277,7 +307,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    margin: 8px 20px 24px;
+    margin: 8px 20px 0;
     padding: 14px;
     background: #fff;
     border: 1px solid #e0e0e0;
@@ -287,6 +317,66 @@ body {
     color: #1a1a1a;
     cursor: pointer;
     width: calc(100% - 40px);
+}
+
+/* ===== BOTÕES LIKE / DESLIKE (FEEDBACK) ===== */
+.feedback-container {
+    display: flex;
+    gap: 12px;
+    margin: 12px 20px 24px;
+}
+
+.feedback-btn {
+    flex: 1;
+    background: #fff;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.25s ease;
+}
+
+.feedback-btn:hover {
+    border-color: #2f6fed;
+    color: #2f6fed;
+    background: #f0f5ff;
+}
+
+/* Like ativo - verde */
+.feedback-btn.like.active {
+    border-color: #0a7a3f;
+    color: #0a7a3f;
+    background: #d4f5e3;
+}
+
+.feedback-btn.like.active svg {
+    fill: #0a7a3f;
+    stroke: #0a7a3f;
+}
+
+/* Deslike ativo - vermelho */
+.feedback-btn.deslike.active {
+    border-color: #c0392b;
+    color: #c0392b;
+    background: #ffe0e0;
+}
+
+.feedback-btn.deslike.active svg {
+    fill: #c0392b;
+    stroke: #c0392b;
+}
+
+.feedback-btn svg {
+    transition: all 0.25s ease;
+    flex-shrink: 0;
 }
 
 /* ===== RODAPÉ ===== */
