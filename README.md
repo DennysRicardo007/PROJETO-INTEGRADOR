@@ -40,6 +40,7 @@ RODAR O PROJETO NO SEGUINTE ENDEREÇO:http://localhost:3001/mapa.html
 
 - HTML
 - CSS
+- JAVASCRIPT
 
 ## 🚀 Como Executar
 

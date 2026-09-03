@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Histórico de ocorrências | MOCAU</title>
+
+    <link rel="stylesheet" href="./css/historico.css">
+</head>
+
+<body>
+    <main class="app-shell">
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <section class="page">
+
+            <!-- CABEÇALHO -->
+            <header class="page-header">
+                <a href="home.html" class="back-button" aria-label="Voltar para o início">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M19 12H5M11 6l-6 6 6 6"></path>
+                    </svg>
+                </a>
+
+                <h1>Histórico de ocorrências</h1>
+
+                <button class="avatar-button" type="button" aria-label="Abrir perfil">
+                    <img
+                        src="https://i.pravatar.cc/100"
+                        alt="Foto do perfil"
+                    >
+                </button>
+            </header>
+
+            <!-- FILTRO + NOVA OCORRÊNCIA -->
+            <section class="history-actions" aria-label="Ações do histórico">
+                <button class="filter-button active" type="button" data-filter="todas">
+                    Todas
+                </button>
+
+                <a href="registrar.html" class="new-occurrence-button">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 5v14M5 12h14"></path>
+                    </svg>
+                    <span>Gerar nova ocorrência</span>
+                </a>
+            </section>
+
+            <!-- LISTA DE OCORRÊNCIAS -->
+            <section
+                id="occurrences-list"
+                class="occurrences-list"
+                aria-label="Lista de ocorrências"
+            >
+                <!-- Os cards são inseridos pelo JavaScript -->
+            </section>
+
+            <!-- ESTADO VAZIO -->
+            <div id="empty-state" class="empty-state" hidden>
+                <div class="empty-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M7 3h10v18H7z"></path>
+                        <path d="M9 7h6M9 11h6M9 15h4"></path>
+                    </svg>
+                </div>
+
+                <h2>Nenhuma ocorrência encontrada</h2>
+                <p>As ocorrências registradas aparecerão aqui.</p>
+            </div>
+
+        </section>
+
+        <!-- NAVEGAÇÃO INFERIOR -->
+        <nav class="bottom-nav" aria-label="Navegação principal">
+
+            <a href="mapa.html" class="nav-item">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M9 18l-6 3V6l6-3 6 3 6-3v15l-6 3-6-3z"></path>
+                    <path d="M9 3v15M15 6v15"></path>
+                </svg>
+                <span>Mapa</span>
+            </a>
+
+            <a href="registrar.html" class="nav-item">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 5v14M5 12h14"></path>
+                </svg>
+                <span>Registrar</span>
+            </a>
+
+            <a href="home.html" class="nav-item">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M3 11.5L12 4l9 7.5"></path>
+                    <path d="M5 10v10h14V10"></path>
+                    <path d="M10 20v-6h4v6"></path>
+                </svg>
+                <span>Início</span>
+            </a>
+
+            <a href="historico.html" class="nav-item active" aria-current="page">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M3 12a9 9 0 1 0 3-6.7"></path>
+                    <path d="M3 4v5h5"></path>
+                    <path d="M12 7v5l3 2"></path>
+                </svg>
+                <span>Histórico</span>
+            </a>
+
+            <a href="comunidade.html" class="nav-item">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="9" cy="8" r="3"></circle>
+                    <circle cx="17" cy="9" r="2.5"></circle>
+                    <path d="M3.5 20c.5-3.2 2.4-5 5.5-5s5 1.8 5.5 5"></path>
+                    <path d="M14 15.5c.9-.8 2-1.2 3.3-1.2 2.2 0 3.6 1.3 4.2 3.7"></path>
+                </svg>
+                <span>Comunidade</span>
+            </a>
+
+        </nav>
+    </main>
+
+    <script src="./js/historico.js"></script>
+</body>
+</html>

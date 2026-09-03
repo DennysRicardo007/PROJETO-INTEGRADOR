@@ -1,0 +1,729 @@
+
+/* =========================================================
+   MOCAU - HISTÓRICO DE OCORRÊNCIAS
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --blue: #0C8CE9;
+    --blue-dark: #087DCE;
+    --filter-blue: #4665E0;
+    --blue-light: #E7F2FD;
+
+    --prototype-bg: #FBFFFE;
+    --prototype-card: #F5F5F5;
+    --prototype-nav: #CAE0FE;
+
+    --text: #242629;
+    --muted: #666666;
+    --background: #DEDEDE;
+    --card: var(--prototype-card);
+    --border: #D6D6D6;
+    --white: var(--prototype-bg);
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    background: var(--background);
+    color: var(--text);
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+button,
+a {
+    font: inherit;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    border: 0;
+}
+
+
+/* =========================================================
+   ESTRUTURA PRINCIPAL
+   ========================================================= */
+
+.app-shell {
+    position: relative;
+
+    width: 100%;
+    min-height: 100vh;
+
+    background: var(--white);
+}
+
+
+/* =========================================================
+   CONTEÚDO
+   ========================================================= */
+
+.page {
+    width: 100%;
+    min-height: 100vh;
+
+    margin: 0;
+
+    padding: 24px 5% 115px;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
+
+.page-header {
+    display: grid;
+
+    grid-template-columns: 42px 1fr 42px;
+
+    align-items: center;
+
+    gap: 10px;
+
+    width: 100%;
+    min-height: 48px;
+
+    margin-bottom: 24px;
+}
+
+.page-header h1 {
+    margin: 0;
+
+    text-align: center;
+
+    font-size: clamp(18px, 2.5vw, 24px);
+    font-weight: 800;
+
+    line-height: 1.2;
+}
+
+
+/* =========================================================
+   BOTÃO VOLTAR / AVATAR
+   ========================================================= */
+
+.back-button,
+.avatar-button {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    padding: 0;
+
+    background: transparent;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+}
+
+.back-button:hover,
+.avatar-button:hover {
+    background: #f2f2f2;
+}
+
+.back-button svg {
+    width: 27px;
+    height: 27px;
+
+    fill: none;
+
+    stroke: var(--blue);
+
+    stroke-width: 2.2;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.avatar-button img {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    background: #ddd;
+}
+
+
+/* =========================================================
+   FILTRO + BOTÃO DE NOVA OCORRÊNCIA
+   ========================================================= */
+
+.history-actions {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 16px;
+
+    width: 100%;
+
+    margin-bottom: 20px;
+}
+
+.filter-button {
+    min-width: 76px;
+
+    padding: 8px 16px;
+
+    border-radius: 18px;
+
+    background: var(--filter-blue);
+
+    color: var(--white);
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease;
+}
+
+.filter-button:hover {
+    background: #3B58D1;
+}
+
+.filter-button:active,
+.new-occurrence-button:active,
+.nav-item:active {
+    transform: scale(0.97);
+}
+
+
+/* =========================================================
+   BOTÃO NOVA OCORRÊNCIA
+   ========================================================= */
+
+.new-occurrence-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    min-height: 38px;
+
+    padding: 8px 14px;
+
+    border-radius: 19px;
+
+    background: var(--blue);
+
+    color: var(--white);
+
+    font-size: 13px;
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease;
+}
+
+.new-occurrence-button:hover {
+    background: var(--blue-dark);
+}
+
+.new-occurrence-button svg {
+    width: 18px;
+    height: 18px;
+
+    flex: 0 0 auto;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 2.4;
+
+    stroke-linecap: round;
+}
+
+
+/* =========================================================
+   LISTA DE OCORRÊNCIAS
+   ========================================================= */
+
+.occurrences-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.occurrence-card {
+    display: grid;
+
+    grid-template-columns: 88px 1fr;
+
+    align-items: center;
+
+    gap: 15px;
+
+    width: 100%;
+    min-height: 112px;
+
+    padding: 12px 14px;
+
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.occurrence-card:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================================================
+   IMAGEM DA OCORRÊNCIA
+   ========================================================= */
+
+.occurrence-image {
+    width: 88px;
+    height: 82px;
+
+    border-radius: 12px;
+
+    object-fit: cover;
+
+    background: #ddd;
+}
+
+
+/* =========================================================
+   INFORMAÇÕES
+   ========================================================= */
+
+.occurrence-info {
+    min-width: 0;
+}
+
+.occurrence-address {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    line-height: 1.25;
+}
+
+.occurrence-location,
+.occurrence-protocol,
+.occurrence-date {
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    line-height: 1.35;
+}
+
+.occurrence-protocol strong,
+.occurrence-date strong {
+    color: #444;
+}
+
+
+/* =========================================================
+   ESTADO VAZIO
+   ========================================================= */
+
+.empty-state {
+    padding: 50px 20px;
+
+    text-align: center;
+}
+
+.empty-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 58px;
+    height: 58px;
+
+    margin: 0 auto 14px;
+
+    border-radius: 50%;
+
+    background: var(--blue-light);
+
+    color: var(--blue);
+}
+
+.empty-icon svg {
+    width: 30px;
+    height: 30px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.empty-state h2 {
+    margin: 0 0 6px;
+
+    font-size: 17px;
+}
+
+.empty-state p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   NAVEGAÇÃO INFERIOR
+   ========================================================= */
+
+.bottom-nav {
+    position: fixed;
+
+    z-index: 20;
+
+    left: 0;
+    bottom: 0;
+
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    width: 100%;
+
+    min-height: 76px;
+
+    padding: 8px 10px max(8px, env(safe-area-inset-bottom));
+
+    background: var(--prototype-nav);
+
+    border-top: 1px solid #B8D2F0;
+
+    box-shadow: none;
+
+    backdrop-filter: blur(8px);
+}
+
+.nav-item {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 4px;
+
+    min-width: 0;
+
+    padding: 4px 2px;
+
+    color: #242424;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    border-radius: 10px;
+
+    transition:
+        background 0.15s ease,
+        color 0.15s ease,
+        transform 0.15s ease;
+}
+
+.nav-item:hover {
+    background: #f3f3f3;
+}
+
+.nav-item svg {
+    width: 25px;
+    height: 25px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.9;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.nav-item.active {
+    color: var(--blue);
+
+    font-weight: 800;
+}
+
+.nav-item.active svg {
+    stroke-width: 2.3;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE - TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .page {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE - MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    body {
+        background: var(--prototype-bg);
+    }
+
+    .app-shell {
+        background: var(--prototype-bg);
+    }
+
+    .page {
+        width: 100%;
+
+        padding: 16px 16px 108px;
+    }
+
+
+    /* Cabeçalho */
+
+    .page-header {
+        grid-template-columns: 36px 1fr 36px;
+
+        gap: 6px;
+
+        margin-bottom: 20px;
+    }
+
+    .back-button,
+    .avatar-button {
+        width: 36px;
+        height: 36px;
+    }
+
+    .back-button svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .avatar-button img {
+        width: 34px;
+        height: 34px;
+    }
+
+    .page-header h1 {
+        font-size: 17px;
+    }
+
+
+    /* Filtro */
+
+    .history-actions {
+        gap: 10px;
+
+        margin-bottom: 16px;
+    }
+
+    .filter-button {
+        min-width: 68px;
+
+        padding: 7px 13px;
+
+        font-size: 12px;
+    }
+
+
+    /* Nova ocorrência */
+
+    .new-occurrence-button {
+        min-height: 36px;
+
+        padding: 7px 11px;
+
+        border-radius: 18px;
+
+        font-size: 11.5px;
+    }
+
+    .new-occurrence-button svg {
+        width: 16px;
+        height: 16px;
+    }
+
+
+    /* Cards */
+
+    .occurrence-card {
+        grid-template-columns: 72px 1fr;
+
+        gap: 12px;
+
+        min-height: 96px;
+
+        padding: 10px;
+
+        border-radius: 12px;
+    }
+
+    .occurrence-image {
+        width: 72px;
+        height: 70px;
+
+        border-radius: 10px;
+    }
+
+    .occurrence-address {
+        font-size: 11.5px;
+    }
+
+    .occurrence-location,
+    .occurrence-protocol,
+    .occurrence-date {
+        font-size: 10.5px;
+    }
+
+
+    /* Navegação */
+
+    .bottom-nav {
+        width: 100%;
+
+        min-height: 68px;
+
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .nav-item {
+        gap: 3px;
+
+        font-size: 9px;
+    }
+
+    .nav-item svg {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+
+/* =========================================================
+   CELULARES PEQUENOS
+   ========================================================= */
+
+@media (max-width: 390px) {
+
+    .page {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .history-actions {
+        gap: 7px;
+    }
+
+    .new-occurrence-button {
+        padding-left: 9px;
+        padding-right: 9px;
+
+        font-size: 10.5px;
+    }
+
+    .occurrence-card {
+        grid-template-columns: 64px 1fr;
+
+        gap: 10px;
+    }
+
+    .occurrence-image {
+        width: 64px;
+        height: 64px;
+    }
+
+    .nav-item {
+        font-size: 8px;
+    }
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE
+   ========================================================= */
+
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid rgba(47, 169, 240, 0.35);
+
+    outline-offset: 2px;
+}
