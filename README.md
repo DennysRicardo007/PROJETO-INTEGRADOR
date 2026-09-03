@@ -4,6 +4,8 @@
 
 AVISO: A API DO GOOOGLE MAPS RODA APENAS NO NODE 24.16.0.
 
+RODAR O PROJETO NO SEGUINTE ENDEREÇO:http://localhost:3001/mapa.html
+
 ## 👥 Integrantes
 
 - Aira Soares
