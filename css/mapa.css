@@ -1,4 +1,6 @@
-* {
+
+
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -9,7 +11,12 @@ body {
     background-color: #e9e9e9;
     display: flex;
     justify-content: center;
-}
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+} 
 
 .app {
     width: 100%;
@@ -64,7 +71,7 @@ body {
 
 .comunidade-info h2 {
     font-size: 10px;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 4px;
 }
 
@@ -141,15 +148,23 @@ body {
     gap: 6px;
     padding: 4px;
     font-size: 10px;
-    font-weight: 600;
+    font-weight: 700;
     color: #222;
     background-color: transparent;
     border-radius: 0;
 }
 
-.btn-vazamento-agua .icone,
-.legenda-falta-agua .icone {
-    font-size: 20px;
+.btn-vazamento-agua > span:last-child,
+.legenda-falta-agua > span:last-child {
+    font-weight: 900;
+     font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.btn-vazamento-agua img,
+.legenda-falta-agua img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
 }
 
 .navegacao {
