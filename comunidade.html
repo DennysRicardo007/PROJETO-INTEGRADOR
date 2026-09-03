@@ -4,16 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comunidade</title>
-    <link rel="stylesheet" href="./css/comunidade.css">
-
-    <script src="./js/comunidade.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <div class="app-container">
-    
-    
-    
     
     <header class="cabecalho">
         <button class="btn-voltar" aria-label="Voltar">
@@ -23,13 +17,11 @@
         </button>
         <h1 class="cabecalho__titulo">Comunidade</h1>
         <div class="cabecalho__perfil">
-            <img src="Imagens/marta.png" alt="Foto de perfil"/>
+            <img src="marta.png" alt="Foto de perfil"/>
         </div>
     </header>
     
-    
     <p class="comunidade-nome">Comunidades - Alta Santa Terezinha</p>
-    
     
     <nav class="abas">
         <button class="aba aba--ativa">
@@ -38,18 +30,15 @@
         </button>
     </nav>
     
-   
     <main class="conteudo">
         
-       
         <p class="rotulo-secao rotulo-secao--destaque">Minhas ocorrências</p>
         
-        
-        <article class="ocorrencia-destaque">
-            <span class="selo-status selo-status--atendimento">Em atendimento</span>
+        <article class="ocorrencia-destaque" id="ocorrencia-principal">
+            <span class="selo-status selo-status--principal" id="selo-principal">Em atendimento</span>
             
             <div class="ocorrencia-destaque__icone">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="#4a90d9">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#4a90d9" id="icone-principal">
                     <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
                 </svg>
             </div>
@@ -61,7 +50,6 @@
             </div>
         </article>
         
-       
         <button class="secao-expansivel" type="button" data-alvo="lista-perfis" aria-expanded="true">
             Outros Perfis
             <svg class="secao-expansivel__seta" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -69,7 +57,6 @@
             </svg>
         </button>
         
-     
         <ul id="lista-perfis" class="lista-perfis">
             
             <li class="perfil-comentario">
@@ -116,17 +103,29 @@
             
         </ul>
         
-      
         <button class="btn-resolvida" type="button">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2f6fed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M7 10v12M15 5.88L14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H7V10l4.34-7.54a1.5 1.5 0 0 1 2.66 1.42z"/>
             </svg>
             Sua ocorrência foi resolvida?
         </button>
-      
+        
+        <div class="feedback-container">
+            <button class="feedback-btn like" type="button" id="btn-like">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+                </svg>
+                Sim
+            </button>
+            <button class="feedback-btn deslike" type="button" id="btn-deslike">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/>
+                </svg>
+                Não
+            </button>
+        </div>
         
     </main>
-    
     
     <nav class="rodape">
         
@@ -172,7 +171,6 @@
     </nav>
     
 </div>
-
 <script src="Comunidade.js"></script>
 </body>
 </html>
