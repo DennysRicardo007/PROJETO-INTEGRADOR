@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // 4. Direciona o usuário para a próxima etapa após um pequeno atraso,
         //    para que o feedback visual seja percebido antes da navegação.
         window.setTimeout(function () {
-          window.location.href = 'nova-ocorrencia.html';
+          window.location.href = 'registrar2.html';
         }, 200);
       });
     });

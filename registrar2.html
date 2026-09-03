@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOCAL — Nova ocorrência</title>
+  <link rel="stylesheet" href="./css/registrar2.css">
+  <script src="./js/registrar2.js" defer></script>
+</head>
+<body>
+
+  <div class="app">
+
+    <header class="cabecalho">
+      <button type="button" class="botao-voltar" id="botaoVoltar" aria-label="Voltar para a página anterior">
+        <span aria-hidden="true">&#8592;</span>
+        <a href="./registrar.html" class="link-voltar" aria-label="Voltar para a página anterior"></a>
+      </button>
+
+      <h1 class="titulo-cabecalho">Registrar</h1>
+
+      <div class="avatar-usuario">
+        <img src="img/avatar-usuario.png" alt="Foto de perfil do usuário">
+      </div>
+    </header>
+
+    <main class="conteudo-principal">
+
+      <section class="secao-descricao" aria-labelledby="tituloDescricao">
+        <h2 id="tituloDescricao" class="titulo-descricao">Descreva o seu problema?</h2>
+
+        <label for="descricaoProblema" class="rotulo-oculto">Descrição do problema</label>
+        <textarea
+          id="descricaoProblema"
+          class="campo-descricao"
+          placeholder="Digite aqui"
+          rows="8"
+        ></textarea>
+        <p class="mensagem-erro" id="mensagemErroDescricao" role="alert" hidden>
+          Digite uma descrição do problema antes de continuar.
+        </p>
+      </section>
+
+      <section class="secao-anexos" aria-labelledby="tituloAnexos">
+        <h2 id="tituloAnexos" class="titulo-anexos">
+          <!-- Ícone temporário (emoji). Substituir por img/icone-camera.png quando disponível -->
+          <span aria-hidden="true">📷</span>
+          Anexos
+        </h2>
+
+        <div class="area-anexo">
+          <input
+            type="file"
+            id="arquivoAnexo"
+            class="input-anexo"
+            accept="image/*"
+          >
+          <label for="arquivoAnexo" class="rotulo-anexo">
+            <span class="icone-adicionar" aria-hidden="true">+</span>
+            <span>Adicionar</span>
+          </label>
+          <img id="previewAnexo" class="preview-anexo" src="" alt="Prévia da imagem anexada" hidden>
+        </div>
+      </section>
+
+      <button type="button" class="botao-proximo" id="botaoProximo">
+        Próximo
+      </button>
+
+    </main>
+
+    <nav class="menu-inferior" aria-label="Navegação principal">
+      <a href="mapa.html" class="item-menu">
+        <span class="icone-menu" aria-hidden="true">🗺️</span>
+        <span class="texto-menu">Mapa</span>
+      </a>
+
+      <a href="registrar.html" class="item-menu item-menu-ativo" aria-current="page">
+        <span class="icone-menu" aria-hidden="true">➕</span>
+        <span class="texto-menu">Registrar</span>
+      </a>
+
+      <a href="home.html" class="item-menu">
+        <span class="icone-menu" aria-hidden="true">🏠</span>
+        <span class="texto-menu">Início</span>
+      </a>
+
+      <!-- TODO: atualizar href quando historico.html for criado -->
+      <a href="#" class="item-menu">
+        <span class="icone-menu" aria-hidden="true">🕓</span>
+        <span class="texto-menu">Histórico</span>
+      </a>
+
+      <!-- TODO: atualizar href quando comunidade.html for criado -->
+      <a href="#" class="item-menu">
+        <span class="icone-menu" aria-hidden="true">👥</span>
+        <span class="texto-menu">Comunidade</span>
+      </a>
+    </nav>
+
+  </div>
+
+</body>
+</html>
