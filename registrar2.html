@@ -14,7 +14,6 @@
     <header class="cabecalho">
       <button type="button" class="botao-voltar" id="botaoVoltar" aria-label="Voltar para a página anterior">
         <span aria-hidden="true">&#8592;</span>
-        <a href="./registrar.html" class="link-voltar" aria-label="Voltar para a página anterior"></a>
       </button>
 
       <h1 class="titulo-cabecalho">Registrar</h1>
@@ -71,29 +70,43 @@
 
     <nav class="menu-inferior" aria-label="Navegação principal">
       <a href="mapa.html" class="item-menu">
-        <span class="icone-menu" aria-hidden="true">🗺️</span>
-        <span class="texto-menu">Mapa</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4zM8 2v16M16 6v16"/>
+            </svg>
+            <span>Mapa</span>
       </a>
 
       <a href="registrar.html" class="item-menu item-menu-ativo" aria-current="page">
-        <span class="icone-menu" aria-hidden="true">➕</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 5v14M5 12h14"/>
+            </svg>
         <span class="texto-menu">Registrar</span>
       </a>
 
       <a href="home.html" class="item-menu">
-        <span class="icone-menu" aria-hidden="true">🏠</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
         <span class="texto-menu">Início</span>
       </a>
 
       <!-- TODO: atualizar href quando historico.html for criado -->
-      <a href="#" class="item-menu">
-        <span class="icone-menu" aria-hidden="true">🕓</span>
+      <a href="historico.html" class="item-menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+            </svg>
         <span class="texto-menu">Histórico</span>
       </a>
 
       <!-- TODO: atualizar href quando comunidade.html for criado -->
-      <a href="#" class="item-menu">
-        <span class="icone-menu" aria-hidden="true">👥</span>
+      <a href="comunidade.html" class="item-menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
         <span class="texto-menu">Comunidade</span>
       </a>
     </nav>

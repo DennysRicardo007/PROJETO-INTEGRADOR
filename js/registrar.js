@@ -13,10 +13,9 @@ document.addEventListener('DOMContentLoaded', function () {
       // Se existir histórico de navegação, volta para a página anterior.
       // Caso contrário, direciona para home.html.
       if (window.history.length > 1) {
-        window.history.back();
-      } else {
-        window.location.href = 'home.html';
+        window.location.href = './home.html';
       }
+      
     });
   }
 
