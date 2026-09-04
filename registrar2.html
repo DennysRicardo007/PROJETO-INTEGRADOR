@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MOCAL — Registrar ocorrência</title>
-  <link rel="stylesheet" href="css/registrar.css">
-  <script src="js/registrar.js" defer></script>
+  <title>MOCAL — Nova ocorrência</title>
+  <link rel="stylesheet" href="./css/registrar2.css">
+  <script src="./js/registrar2.js" defer></script>
 </head>
 <body>
 
@@ -13,7 +13,6 @@
 
     <header class="cabecalho">
       <button type="button" class="botao-voltar" id="botaoVoltar" aria-label="Voltar para a página anterior">
-        <!-- Ícone de seta: caractere temporário, pode ser substituído por SVG/PNG na pasta img -->
         <span aria-hidden="true">&#8592;</span>
       </button>
 
@@ -26,44 +25,46 @@
 
     <main class="conteudo-principal">
 
-      <section class="secao-problema" aria-labelledby="tituloProblema">
-        <h2 id="tituloProblema" class="titulo-problema">Qual o problema?</h2>
-        <p class="subtitulo-problema">Escolha uma opção</p>
+      <section class="secao-descricao" aria-labelledby="tituloDescricao">
+        <h2 id="tituloDescricao" class="titulo-descricao">Descreva o seu problema?</h2>
 
-        <div class="lista-opcoes" role="group" aria-labelledby="tituloProblema">
+        <label for="descricaoProblema" class="rotulo-oculto">Descrição do problema</label>
+        <textarea
+          id="descricaoProblema"
+          class="campo-descricao"
+          placeholder="Digite aqui"
+          rows="8"
+        ></textarea>
+        <p class="mensagem-erro" id="mensagemErroDescricao" role="alert" hidden>
+          Digite uma descrição do problema antes de continuar.
+        </p>
+      </section>
 
-          <button type="button" class="card-opcao" data-categoria="falta-de-agua" aria-label="Registrar ocorrência: Falta de água">
-            <img class="icone-opcao" src="img/icone-falta-agua.png" alt="" aria-hidden="true">
-            <span class="texto-opcao">Falta de água</span>
-            <a href="./registrar2.html" class="link-registrar" aria-label="Registrar ocorrência: Falta de água"></a>
-          </button>
+      <section class="secao-anexos" aria-labelledby="tituloAnexos">
+        <h2 id="tituloAnexos" class="titulo-anexos">
+          <!-- Ícone temporário (emoji). Substituir por img/icone-camera.png quando disponível -->
+          <span aria-hidden="true">📷</span>
+          Anexos
+        </h2>
 
-          <button type="button" class="card-opcao" data-categoria="vazamento-de-agua" aria-label="Registrar ocorrência: Vazamento de água">
-            <img class="icone-opcao" src="img/icone-vazamento.png" alt="" aria-hidden="true">
-            <span class="texto-opcao">Vazamento de água</span>
-            <a href="./registrar2.html" class="link-registrar" aria-label="Registrar ocorrência: Vazamento de água"></a>
-          </button>
-
-          <button type="button" class="card-opcao" data-categoria="esgoto-a-ceu-aberto" aria-label="Registrar ocorrência: Esgoto a céu aberto">
-            <img class="icone-opcao" src="img/icone-esgoto.png" alt="" aria-hidden="true">
-            <span class="texto-opcao">Esgoto a céu aberto</span>
-            <a href="./registrar2.html" class="link-registrar" aria-label="Registrar ocorrência: Esgoto a céu aberto"></a>
-          </button>
-
-          <button type="button" class="card-opcao" data-categoria="lixo-acumulado" aria-label="Registrar ocorrência: Lixo acumulado">
-            <img class="icone-opcao" src="img/icone-lixo.png" alt="" aria-hidden="true">
-            <span class="texto-opcao">Lixo acumulado</span>
-            <a href="./registrar2.html" class="link-registrar" aria-label="Registrar ocorrência: Lixo acumulado"></a>
-          </button>
-
-          <button type="button" class="card-opcao" data-categoria="outros-problemas" aria-label="Registrar ocorrência: Outros problemas">
-            <img class="icone-opcao" src="img/icone-outros.png" alt="" aria-hidden="true">
-            <span class="texto-opcao">Outros problemas</span>
-            <a href="./registrar2.html" class="link-registrar" aria-label="Registrar ocorrência: Outros problemas"></a>
-          </button>
-
+        <div class="area-anexo">
+          <input
+            type="file"
+            id="arquivoAnexo"
+            class="input-anexo"
+            accept="image/*"
+          >
+          <label for="arquivoAnexo" class="rotulo-anexo">
+            <span class="icone-adicionar" aria-hidden="true">+</span>
+            <span>Adicionar</span>
+          </label>
+          <img id="previewAnexo" class="preview-anexo" src="" alt="Prévia da imagem anexada" hidden>
         </div>
       </section>
+
+      <button type="button" class="botao-proximo" id="botaoProximo">
+        Próximo
+      </button>
 
     </main>
 
