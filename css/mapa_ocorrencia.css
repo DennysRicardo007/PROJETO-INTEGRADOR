@@ -1,0 +1,311 @@
+/* ==========================================================================
+   nova-ocorrencia.css — Tela "Confirmar local" do MOCAL
+   Mobile-first, sem frameworks, sem dependências externas.
+   Segue os mesmos tokens visuais de registrar.css.
+   ========================================================================== */
+
+:root {
+  --cor-primaria: #1E6FE0;
+  --cor-primaria-escura: #185ABF;
+  --cor-destaque: #EB5C2B;
+  --cor-texto: #16181C;
+  --cor-texto-secundario: #6B7280;
+  --cor-fundo: #FFFFFF;
+  --cor-fundo-suave: #F5F6F8;
+  --cor-borda: #E6E8EC;
+  --cor-nav-fundo: #E4EEFD;
+  --raio-grande: 20px;
+  --raio-medio: 14px;
+  --raio-pilula: 999px;
+  --sombra-suave: 0 2px 10px rgba(16, 24, 40, 0.06);
+  --espaco-lateral: 20px;
+  --fonte-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--fonte-base);
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: inherit;
+}
+
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--cor-fundo);
+}
+
+/* --- Cabeçalho ----------------------------------------------------------- */
+
+.cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px var(--espaco-lateral) 8px;
+}
+
+.botao-voltar {
+  border: none;
+  background: none;
+  padding: 4px;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--cor-destaque);
+  cursor: pointer;
+}
+
+.titulo-cabecalho {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--cor-texto);
+}
+
+.avatar-usuario {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid var(--cor-borda);
+}
+
+.avatar-usuario img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* --- Conteúdo principal --------------------------------------------------- */
+
+.conteudo-principal {
+  flex: 1;
+  padding: 4px var(--espaco-lateral) 24px;
+}
+
+.secao-local {
+  display: flex;
+  flex-direction: column;
+}
+
+.titulo-local {
+  margin: 10px 0 4px;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--cor-texto);
+}
+
+.subtitulo-local {
+  margin: 0 0 14px;
+  font-size: 14px;
+  color: var(--cor-texto-secundario);
+}
+
+/* --- Mapa ------------------------------------------------------------------ */
+
+.mapa-preview {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  border-radius: var(--raio-grande);
+  overflow: hidden;
+  background: var(--cor-fundo-suave);
+  box-shadow: var(--sombra-suave);
+}
+
+.mapa {
+  width: 100%;
+  height: 100%;
+}
+
+/* O Google Maps injeta seus próprios elementos internos (div.gm-style);
+   isso só garante que eles herdem o border-radius do card. */
+.mapa > div {
+  border-radius: inherit;
+}
+
+.mapa-carregando {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cor-fundo-suave);
+  color: var(--cor-texto-secundario);
+  font-size: 14px;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.mapa-carregando.oculto {
+  opacity: 0;
+}
+
+/* Pino fixo no centro do card: o mapa se move por baixo dele para escolher
+   o local (mesmo padrão usado em Uber/Google Maps ao soltar um marcador). */
+.pino-mapa {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.25));
+  pointer-events: none;
+  z-index: 500; /* acima dos tiles e controles do Leaflet */
+}
+
+.botao-recarregar-mapa {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 500;
+  border: none;
+  background: var(--cor-fundo);
+  color: var(--cor-primaria);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: var(--raio-pilula);
+  box-shadow: var(--sombra-suave);
+  cursor: pointer;
+  display: none;
+}
+
+.botao-recarregar-mapa.visivel {
+  display: inline-flex;
+}
+
+/* --- Endereço --------------------------------------------------------------- */
+
+.endereco {
+  margin-top: 18px;
+}
+
+.endereco-linha-1 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--cor-texto);
+}
+
+.endereco-linha-2 {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: var(--cor-texto-secundario);
+}
+
+/* --- Botões ------------------------------------------------------------------ */
+
+.botao-localizacao {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  margin-top: 18px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: var(--raio-pilula);
+  background: var(--cor-fundo-suave);
+  color: var(--cor-primaria);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.botao-localizacao:hover {
+  background: #ECF1FA;
+}
+
+.botao-localizacao:active {
+  background: #E1E9F7;
+}
+
+.icone-localizacao {
+  display: inline-flex;
+  color: var(--cor-primaria);
+}
+
+.botao-proximo {
+  margin-top: 24px;
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: var(--raio-medio);
+  background: var(--cor-primaria);
+  color: #FFFFFF;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.botao-proximo:hover {
+  background: var(--cor-primaria-escura);
+}
+
+.botao-proximo:disabled {
+  background: #B9CDEF;
+  cursor: not-allowed;
+}
+
+/* --- Menu inferior ------------------------------------------------------------ */
+
+.menu-inferior {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 12px 6px calc(12px + env(safe-area-inset-bottom, 0px));
+  background: var(--cor-nav-fundo);
+  border-top-left-radius: var(--raio-grande);
+  border-top-right-radius: var(--raio-grande);
+}
+
+.item-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  text-decoration: none;
+  color: var(--cor-texto-secundario);
+  font-size: 12px;
+  min-width: 56px;
+}
+
+.icone-menu {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.item-menu-ativo {
+  color: var(--cor-primaria);
+  font-weight: 700;
+}
+
+/* --- Responsivo --------------------------------------------------------------- */
+
+@media (min-width: 480px) {
+  .app {
+    box-shadow: var(--sombra-suave);
+    border-radius: 24px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+}
