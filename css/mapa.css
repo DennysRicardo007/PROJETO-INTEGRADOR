@@ -391,6 +391,27 @@ body {
     background: #f3f3f3;
 }
 
+.bottom-nav .nav-item {
+    padding: 4px 2px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.bottom-nav .nav-item svg {
+    width: 25px;
+    height: 25px;
+}
+
+.bottom-nav .nav-item.active {
+    font-weight: 800;
+}
+
+.bottom-nav .nav-item.active svg {
+    stroke-width: 2.3;
+}
+
 /* Regra final da navegação inferior: aplica em qualquer largura */
 .bottom-nav {
     position: fixed;
