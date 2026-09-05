@@ -16,12 +16,13 @@ body {
     background-color: #f0f0f0;
     display: flex;
     justify-content: center;
-} 
+    min-width: 0;
+}
 
 .app {
     width: 100%;
-    max-width: 375px;
-    min-height: 100vh;
+    max-width: 75rem;
+    min-height: 100dvh;
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
@@ -33,7 +34,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 18px 12px;
+    padding: 12px clamp(16px, 4vw, 48px);
 }
 
 .cabecalho h1 {
@@ -47,6 +48,11 @@ body {
     font-size: 28px;
     line-height: 1;
     color: #ff1f2d;
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .foto-perfil {
@@ -78,7 +84,8 @@ body {
 .comunidade-info p {
     font-size: 9px;
     opacity: 0.95;
-    max-width: 180px;
+    max-width: 100%;
+    overflow-wrap: anywhere;
 }
 
 .comunidade img {
@@ -97,14 +104,16 @@ body {
 
 .mapa img {
     width: 100%;
-    height: 620px;
+    height: auto;
+    max-height: 620px;
+    aspect-ratio: 16 / 10;
     object-fit: cover;
     display: block;
 }
 
 #map {
     width: calc(100% - 24px);
-    height: 620px;
+    height: clamp(300px, 65vh, 620px);
     border-radius: 12px;
     margin: 0 12px 10px;
     overflow: hidden;
@@ -173,7 +182,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    max-width: 375px;
+    max-width: 75rem;
     background-color: #d7e9fb;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -191,6 +200,65 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 2px;
+    min-width: 44px;
+    min-height: 44px;
+}
+
+@media (min-width: 576px) {
+    .comunidade {
+        margin-left: clamp(16px, 4vw, 48px);
+        margin-right: clamp(16px, 4vw, 48px);
+    }
+
+    #map {
+        height: clamp(360px, 62vh, 680px);
+    }
+}
+
+@media (min-width: 768px) {
+    .comunidade {
+        padding: 16px 20px;
+    }
+
+    .comunidade-info h2 {
+        font-size: 1rem;
+    }
+
+    .comunidade-info p {
+        font-size: 0.9rem;
+    }
+
+    #map {
+        width: calc(100% - clamp(32px, 8vw, 96px));
+        margin-left: clamp(16px, 4vw, 48px);
+        margin-right: clamp(16px, 4vw, 48px);
+    }
+
+    .legenda {
+        justify-content: center;
+        gap: 48px;
+    }
+}
+
+@media (min-width: 992px) {
+    .app {
+        margin: 24px auto;
+        min-height: calc(100dvh - 48px);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 0 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .navegacao {
+        left: 50%;
+        width: min(100%, 75rem);
+    }
+}
+
+@media (min-width: 1200px) {
+    #map {
+        height: min(68vh, 760px);
+    }
 }
 
 .navegacao-item span {

@@ -8,20 +8,26 @@ body {
   background-color: #f0f0f0;
   display: flex;
   justify-content: center;
+  min-width: 0;
 }
 
 .app {
   position: relative;
-  width: 375px;
-  height: 100vh;
+  width: 100%;
+  max-width: 75rem;
+  min-height: 100dvh;
   background-color: #ffffff;
-  overflow: hidden; /* esconde o menu quando ele estiver fora da tela */
+  overflow-x: hidden;
 }
 
 /* ===== CONTEÚDO PRINCIPAL (HOME) ===== */
 .conteudo {
-  padding: 20px 18px;
-  height: 100%;
+  width: 100%;
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: 20px clamp(16px, 4vw, 48px);
+  min-height: 100dvh;
+  padding-bottom: 32px;
   overflow-y: auto;
   transition: transform 0.3s ease;
 }
@@ -39,6 +45,8 @@ body {
 }
 
 .menu-icon {
+  width: 44px;
+  height: 44px;
   font-size: 24px;
   cursor: pointer;
   background: none;
@@ -73,6 +81,7 @@ body {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
+  min-width: 0;
 }
 
 .banner-texto strong {
@@ -84,6 +93,7 @@ body {
 .banner-texto span {
   font-size: 13px;
   color: #1a1a1a;
+  overflow-wrap: anywhere;
 }
 
 .banner-comunidade img {
@@ -106,6 +116,8 @@ body {
   text-align: center;
   cursor: pointer;
   border: none;
+  min-height: 96px;
+  text-decoration: none;
 }
 
 .botao .icone {
@@ -145,6 +157,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+  min-width: 0;
 }
 
 .ocorrencia-icone { font-size: 20px; }
@@ -155,6 +168,7 @@ body {
 }
 
 .ocorrencia-texto span {
+  overflow-wrap: anywhere;
   font-size: 12px;
   color: #555;
 }
@@ -164,6 +178,7 @@ body {
   height: 40px;
   border-radius: 8px;
   object-fit: cover;
+  flex: 0 0 auto;
 }
 
 /* ===== MENU LATERAL ===== */
@@ -171,7 +186,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 220px;
+  width: min(82vw, 320px);
   height: 100%;
   background-color: #dbeeff;
   border-right: 2px solid #3b9cff;
@@ -186,6 +201,8 @@ body {
 }
 
 .menu-fechar {
+  width: 44px;
+  height: 44px;
   font-size: 22px;
   cursor: pointer;
   margin-bottom: 40px;
@@ -200,6 +217,7 @@ body {
 }
 
 .menu-lista li {
+  min-height: 44px;
   padding: 10px 0;
   font-size: 16px;
   color: #222;
@@ -233,4 +251,58 @@ body {
 .app.menu-aberto .overlay {
   opacity: 1;
   pointer-events: auto; /* permite clicar fora do menu para fechar */
+}
+
+@media (min-width: 576px) {
+  .conteudo {
+    padding-top: 28px;
+  }
+
+  .grid-botoes {
+    gap: 18px;
+  }
+}
+
+@media (min-width: 768px) {
+  .header {
+    margin-bottom: 32px;
+  }
+
+  .saudacao {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  .grid-botoes {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .ocorrencias {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .ocorrencia {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .app {
+    margin: 24px auto;
+    min-height: calc(100dvh - 48px);
+    border-radius: 20px;
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .conteudo {
+    min-height: calc(100dvh - 48px);
+  }
+}
+
+@media (min-width: 1200px) {
+  .conteudo {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
 }

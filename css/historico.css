@@ -63,6 +63,7 @@ button {
     min-height: 100vh;
 
     background: var(--white);
+    overflow-x: hidden;
 }
 
 
@@ -77,6 +78,8 @@ button {
     margin: 0;
 
     padding: 24px 5% 115px;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 
@@ -197,6 +200,7 @@ button {
     font-weight: 700;
 
     cursor: pointer;
+    min-height: 44px;
 
     transition:
         transform 0.15s ease,
@@ -242,6 +246,7 @@ button {
     white-space: nowrap;
 
     cursor: pointer;
+    min-height: 44px;
 
     transition:
         transform 0.15s ease,
@@ -521,198 +526,45 @@ button {
 }
 
 
-/* =========================================================
-   RESPONSIVIDADE - TABLET
-   ========================================================= */
-
-@media (max-width: 900px) {
-
+@media (min-width: 576px) {
     .page {
-        padding-left: 4%;
-        padding-right: 4%;
+        padding-left: 6%;
+        padding-right: 6%;
     }
-
 }
 
-
-/* =========================================================
-   RESPONSIVIDADE - MOBILE
-   ========================================================= */
-
-@media (max-width: 600px) {
-
-    body {
-        background: var(--prototype-bg);
-    }
-
-    .app-shell {
-        background: var(--prototype-bg);
-    }
-
+@media (min-width: 768px) {
     .page {
-        width: 100%;
-
-        padding: 16px 16px 108px;
+        padding-left: clamp(32px, 7vw, 96px);
+        padding-right: clamp(32px, 7vw, 96px);
     }
 
-
-    /* Cabeçalho */
-
-    .page-header {
-        grid-template-columns: 36px 1fr 36px;
-
-        gap: 6px;
-
-        margin-bottom: 20px;
+    .occurrences-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+}
 
-    .back-button,
-    .avatar-button {
-        width: 36px;
-        height: 36px;
+@media (min-width: 992px) {
+    .app-shell {
+        max-width: 1100px;
+        margin: 24px auto;
+        min-height: calc(100dvh - 48px);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 0 24px rgba(0, 0, 0, 0.12);
     }
-
-    .back-button svg {
-        width: 24px;
-        height: 24px;
-    }
-
-    .avatar-button img {
-        width: 34px;
-        height: 34px;
-    }
-
-    .page-header h1 {
-        font-size: 17px;
-    }
-
-
-    /* Filtro */
-
-    .history-actions {
-        gap: 10px;
-
-        margin-bottom: 16px;
-    }
-
-    .filter-button {
-        min-width: 68px;
-
-        padding: 7px 13px;
-
-        font-size: 12px;
-    }
-
-
-    /* Nova ocorrência */
-
-    .new-occurrence-button {
-        min-height: 36px;
-
-        padding: 7px 11px;
-
-        border-radius: 18px;
-
-        font-size: 11.5px;
-    }
-
-    .new-occurrence-button svg {
-        width: 16px;
-        height: 16px;
-    }
-
-
-    /* Cards */
-
-    .occurrence-card {
-        grid-template-columns: 72px 1fr;
-
-        gap: 12px;
-
-        min-height: 96px;
-
-        padding: 10px;
-
-        border-radius: 12px;
-    }
-
-    .occurrence-image {
-        width: 72px;
-        height: 70px;
-
-        border-radius: 10px;
-    }
-
-    .occurrence-address {
-        font-size: 11.5px;
-    }
-
-    .occurrence-location,
-    .occurrence-protocol,
-    .occurrence-date {
-        font-size: 10.5px;
-    }
-
-
-    /* Navegação */
 
     .bottom-nav {
-        width: 100%;
-
-        min-height: 68px;
-
-        padding-left: 5px;
-        padding-right: 5px;
-    }
-
-    .nav-item {
-        gap: 3px;
-
-        font-size: 9px;
-    }
-
-    .nav-item svg {
-        width: 22px;
-        height: 22px;
+        left: 50%;
+        width: min(100%, 1100px);
+        transform: translateX(-50%);
     }
 }
 
-
-/* =========================================================
-   CELULARES PEQUENOS
-   ========================================================= */
-
-@media (max-width: 390px) {
-
-    .page {
-        padding-left: 12px;
-        padding-right: 12px;
-    }
-
-    .history-actions {
-        gap: 7px;
-    }
-
-    .new-occurrence-button {
-        padding-left: 9px;
-        padding-right: 9px;
-
-        font-size: 10.5px;
-    }
-
-    .occurrence-card {
-        grid-template-columns: 64px 1fr;
-
-        gap: 10px;
-    }
-
-    .occurrence-image {
-        width: 64px;
-        height: 64px;
-    }
-
-    .nav-item {
-        font-size: 8px;
+@media (min-width: 1200px) {
+    .occurrences-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 }
 
