@@ -391,6 +391,10 @@ button {
   height: 20px;
 }
 
+.bottom-nav .nav-item:hover {
+  background: #f3f3f3;
+}
+
 @media (min-width: 1200px) {
   .mapa-preview {
     height: min(60vh, 680px);

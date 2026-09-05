@@ -408,6 +408,10 @@ body {
   font-weight: 700;
 }
 
+.bottom-nav .nav-item:hover {
+  background: #f3f3f3;
+}
+
 .menu-inferior {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));

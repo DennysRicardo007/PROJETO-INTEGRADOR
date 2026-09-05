@@ -535,6 +535,10 @@ body {
         font-weight: 700;
     }
 
+    .bottom-nav .nav-item:hover {
+        background: #f3f3f3;
+    }
+
     /* Regra final da navegação inferior: aplica em qualquer largura */
     .bottom-nav {
         position: fixed;

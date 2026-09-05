@@ -346,6 +346,10 @@ body {
   font-weight: 700;
 }
 
+.bottom-nav .nav-item:hover {
+  background: #f3f3f3;
+}
+
 @media (min-width: 1200px) {
   .conteudo {
     padding-left: 64px;
