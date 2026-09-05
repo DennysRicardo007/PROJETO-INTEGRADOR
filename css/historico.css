@@ -457,7 +457,7 @@ button {
 
     width: 100%;
 
-    min-height: 76px;
+    min-height: 64px;
 
     padding: 8px 10px max(8px, env(safe-area-inset-bottom));
 
@@ -547,12 +547,24 @@ button {
 
 @media (min-width: 992px) {
     .app-shell {
-        max-width: 1100px;
-        margin: 24px auto;
-        min-height: calc(100dvh - 48px);
-        border-radius: 20px;
+        max-width: none;
+        margin: 0 auto;
+        min-height: 100dvh;
+        border-radius: 0;
         overflow: hidden;
-        box-shadow: 0 0 24px rgba(0, 0, 0, 0.12);
+        box-shadow: none;
+    }
+
+    .app-shell {
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .bottom-nav {
+        min-height: 64px;
+        padding-top: 4px;
+        padding-bottom: max(4px, env(safe-area-inset-bottom));
+        border-radius: 0;
     }
 
     .bottom-nav {
@@ -566,6 +578,21 @@ button {
     .occurrences-list {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
+}
+
+.bottom-nav {
+    left: 0;
+    right: 0;
+    width: 100%;
+    transform: none;
+    min-height: 64px;
+    height: auto;
+    padding: 4px 8px max(4px, env(safe-area-inset-bottom));
+    border-radius: 0;
+}
+
+.page {
+    padding-bottom: 88px;
 }
 
 
