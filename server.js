@@ -21,6 +21,10 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.static(path.join(__dirname)));
 
+app.get('/', (req, res) => {
+  res.redirect('/mapa.html');
+});
+
 // Rota protegida para obter a chave do Google Maps
 app.get('/api/maps-key', (req, res) => {
   // Verificar origem (referer) para segurança adicional

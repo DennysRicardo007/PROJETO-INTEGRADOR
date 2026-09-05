@@ -13,10 +13,9 @@ document.addEventListener('DOMContentLoaded', function () {
       // Se existir histórico de navegação, volta para a página anterior.
       // Caso contrário, direciona para home.html.
       if (window.history.length > 1) {
-        window.history.back();
-      } else {
-        window.location.href = 'home.html';
+        window.location.href = './home.html';
       }
+      
     });
   }
 
@@ -52,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // 4. Direciona o usuário para a próxima etapa após um pequeno atraso,
         //    para que o feedback visual seja percebido antes da navegação.
         window.setTimeout(function () {
-          window.location.href = 'nova-ocorrencia.html';
+          window.location.href = 'registrar2.html';
         }, 200);
       });
     });
