@@ -5,6 +5,19 @@
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
+:root {
+  --cor-fundo: #ffffff;
+  --cor-card: #f0f0f0;
+  --cor-azul-principal: #1687e8;
+  --cor-azul-claro: #d6e8ff;
+  --cor-vermelho: #ff2525;
+  --cor-texto-principal: #111111;
+  --cor-texto-secundario: #555555;
+  --raio-card: 14px;
+  --largura-maxima-app: 420px;
+  --altura-menu-inferior: 64px;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -40,13 +53,33 @@ body {
     padding: 8px 20px 16px;
 }
 
-.btn-voltar {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 4px;
-    display: flex;
-    align-items: center;
+.botao-voltar {
+  background: none;
+  border: none;
+  color: var(--cor-vermelho);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.botao-voltar:hover {
+  background-color: rgba(255, 37, 37, 0.08);
+}
+
+.botao-voltar:focus-visible {
+  outline: 2px solid var(--cor-vermelho);
+  outline-offset: 2px;
+}
+
+.botao-voltar:active {
+  transform: scale(0.92);
 }
 
 .cabecalho__titulo {
