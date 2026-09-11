@@ -4,7 +4,7 @@ let mapaJaCarregado = false;
 
 function initMap() {
   console.log('Inicializando mapa...');
-  
+
   const recife = { lat: -8.0476, lng: -34.8770 };
   
   // Se o mapa já foi criado, limpa os marcadores antigos
@@ -18,7 +18,13 @@ function initMap() {
     center: recife,
     streetViewControl: false,
     mapTypeControl: false,
-    fullscreenControl: false
+    fullscreenControl: false,
+    styles: [
+      {
+        featureType: "poi",
+        stylers: [{ visibility: "off" }]
+      }
+    ]
   });
 
   mapaJaCarregado = true;
