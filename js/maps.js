@@ -4,7 +4,7 @@ let mapaJaCarregado = false;
 
 function initMap() {
   console.log('Inicializando mapa...');
-  
+
   const recife = { lat: -8.0476, lng: -34.8770 };
   
   // Se o mapa já foi criado, limpa os marcadores antigos
@@ -18,12 +18,18 @@ function initMap() {
     center: recife,
     streetViewControl: false,
     mapTypeControl: false,
-    fullscreenControl: false
+    fullscreenControl: false,
+    styles: [
+      {
+        featureType: "poi",
+        stylers: [{ visibility: "off" }]
+      }
+    ]
   });
 
   mapaJaCarregado = true;
 
-  adicionarMarcador(recife, "Ocorrência de água em Recife");
+  carregarOcorrenciasSalvas();
   console.log('✅ Mapa inicializado com sucesso');
 }
 
@@ -35,6 +41,7 @@ document.addEventListener('visibilitychange', () => {
     console.log('Página voltou a ficar visível');
     // Força redimensionamento do mapa
     google.maps.event.trigger(map, 'resize');
+    carregarOcorrenciasSalvas();
   }
 });
 
@@ -45,16 +52,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-function adicionarMarcador(posicao, titulo) {
-  const marker = new google.maps.Marker({
+function adicionarMarcador(posicao, titulo, categoria) {
+  const opcoesMarcador = {
     position: posicao,
     map: map,
-    title: titulo,
-    icon: {
-      url: "img/icone-emoji.png",
-      scaledSize: new google.maps.Size(32, 32),
-    },
-  });
+    title: titulo
+  };
+
+  const icone = obterIconeDaCategoria(categoria);
+  if (icone) {
+    opcoesMarcador.icon = {
+      url: icone,
+      scaledSize: new google.maps.Size(32, 32)
+    };
+  }
+
+  const marker = new google.maps.Marker(opcoesMarcador);
 
   markers.push(marker);
 
@@ -65,4 +78,53 @@ function adicionarMarcador(posicao, titulo) {
   marker.addListener("click", () => {
     infoWindow.open(map, marker);
   });
+}
+
+function carregarOcorrenciasSalvas() {
+  let ocorrencias = [];
+
+  markers.forEach(marker => marker.setMap(null));
+  markers = [];
+
+  try {
+    ocorrencias = JSON.parse(localStorage.getItem('mocal_ocorrencias')) || [];
+  } catch (erro) {
+    console.warn('Não foi possível carregar as ocorrências salvas:', erro);
+  }
+
+  ocorrencias.forEach(ocorrencia => {
+    const latitude = Number(ocorrencia.latitude);
+    const longitude = Number(ocorrencia.longitude);
+
+    if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+      return;
+    }
+
+    const titulo = formatarCategoria(ocorrencia.categoria);
+    const descricao = ocorrencia.descricao ? `: ${ocorrencia.descricao}` : '';
+
+    adicionarMarcador(
+      { lat: latitude, lng: longitude },
+      `${titulo}${descricao}`,
+      ocorrencia.categoria
+    );
+  });
+}
+
+function obterIconeDaCategoria(categoria) {
+  const icones = {
+    'falta-de-agua': 'img/icone-falta-agua.png',
+    'vazamento-de-agua': 'img/icone-vazamento.png',
+    'esgoto-a-ceu-aberto': 'img/icone-esgoto.png',
+    'lixo-acumulado': 'img/icone-lixo.png',
+    'outros-problemas': 'img/icone-outros.png'
+  };
+
+  return icones[categoria] || 'img/icone-outros.png';
+}
+
+function formatarCategoria(categoria) {
+  return String(categoria || 'Ocorrência')
+    .replaceAll('-', ' ')
+    .replace(/\b\w/g, letra => letra.toUpperCase());
 }
