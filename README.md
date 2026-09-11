@@ -55,12 +55,7 @@ Acompanhe as tarefas, atividades e o andamento do projeto através da nossa Boar
 
 🔗 **[Acessar a Board do Projeto](https://github.com/users/DennysRicardo007/projects/3)**  
 
-## 📁 Estrutura do Projeto
 
-```text
-MOCAU
-├── 
-├── 
 
 
 

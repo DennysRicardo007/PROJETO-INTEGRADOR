@@ -11,6 +11,18 @@ document.querySelectorAll(".secao-expansivel").forEach(function(botao) {
         }
     });
 });
+ const botaoVoltar = document.getElementById('botaoVoltar');
+ 
+ if (botaoVoltar) {
+    botaoVoltar.addEventListener('click', function () {
+      // Se existir histórico de navegação, volta para a página anterior.
+      // Caso contrário, direciona para home.html.
+      if (window.history.length > 1) {
+        window.location.href = './home.html';
+      }
+      
+    });
+  }
 
 // Sistema de feedback Like/Deslike
 (function() {

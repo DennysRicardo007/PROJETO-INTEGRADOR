@@ -21,7 +21,7 @@
   --cor-texto-secundario: #555555;
   --raio-padrao: 10px;
   --largura-maxima-app: 420px;
-  --altura-menu-inferior: 76px;
+  --altura-menu-inferior: 64px;
 }
 
 html {
@@ -33,10 +33,12 @@ body {
   background-color: #e9e9e9;
   color: var(--cor-texto-principal);
   min-height: 100dvh;
+  overflow-x: hidden;
 }
 
 /* Contêiner que simula a tela do celular -------------------------------- */
 .app {
+  width: 100%;
   max-width: var(--largura-maxima-app);
   margin: 0 auto;
   min-height: 100dvh;
@@ -63,6 +65,8 @@ body {
   line-height: 1;
   cursor: pointer;
   padding: 8px;
+  min-width: 44px;
+  min-height: 44px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -132,7 +136,7 @@ body {
 
 .campo-descricao {
   width: 100%;
-  min-height: 220px;
+  min-height: clamp(180px, 30vh, 320px);
   resize: vertical;
   border: none;
   border-radius: var(--raio-padrao);
@@ -169,8 +173,9 @@ body {
 
 .area-anexo {
   position: relative;
-  width: 110px;
-  height: 96px;
+  width: min(110px, 30vw);
+  aspect-ratio: 110 / 96;
+  height: auto;
   border-radius: var(--raio-padrao);
   overflow: hidden;
 }
@@ -228,6 +233,7 @@ body {
 .botao-proximo {
   width: 100%;
   padding: 14px;
+  min-height: 48px;
   border: none;
   border-radius: var(--raio-padrao);
   background-color: var(--cor-azul-principal);
@@ -277,6 +283,8 @@ body {
   color: var(--cor-texto-secundario);
   font-size: 0.72rem;
   padding: 4px 6px;
+  min-width: 44px;
+  min-height: 44px;
   border-radius: 10px;
 }
 
@@ -299,6 +307,51 @@ body {
 }
 
 /* Telas maiores: mantém a app centralizada, simulando um celular --------- */
+@media (min-width: 576px) {
+  .conteudo-principal {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 768px) {
+  .app {
+    max-width: 720px;
+  }
+
+  .conteudo-principal {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(180px, 240px);
+    align-content: start;
+    column-gap: 24px;
+  }
+
+  .secao-descricao {
+    grid-row: span 2;
+  }
+
+  .botao-proximo {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 992px) {
+  .app {
+    max-width: 960px;
+  }
+
+  .conteudo-principal {
+    padding-left: clamp(32px, 6vw, 80px);
+    padding-right: clamp(32px, 6vw, 80px);
+  }
+}
+
+@media (min-width: 1200px) {
+  .app {
+    max-width: 1100px;
+  }
+}
+
 @media (min-width: 480px) {
   .app {
     box-shadow: 0 0 24px rgba(0, 0, 0, 0.12);
@@ -308,4 +361,101 @@ body {
     margin-bottom: 24px;
     min-height: calc(100dvh - 48px);
   }
+}
+
+.app {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  min-height: 64px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  padding: 4px 8px max(4px, env(safe-area-inset-bottom));
+  background: var(--cor-azul-claro);
+  border-top: 1px solid #c7ddf7;
+}
+
+.bottom-nav .nav-item {
+  display: flex;
+  min-width: 44px;
+  min-height: 44px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 3px 2px;
+  color: var(--cor-texto-secundario);
+  font-size: 0.72rem;
+  text-align: center;
+  text-decoration: none;
+}
+
+.bottom-nav .nav-item svg {
+  width: 20px;
+  height: 20px;
+}
+
+.bottom-nav .nav-item.active {
+  color: var(--cor-azul-principal);
+  font-weight: 700;
+}
+
+.bottom-nav .nav-item:hover {
+  background: #f3f3f3;
+}
+
+.bottom-nav .nav-item {
+  padding: 4px 2px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.bottom-nav .nav-item svg {
+  width: 25px;
+  height: 25px;
+}
+
+.bottom-nav .nav-item.active {
+  font-weight: 800;
+}
+
+.bottom-nav .nav-item.active svg {
+  stroke-width: 2.3;
+}
+
+.menu-inferior {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  min-height: 64px;
+  height: auto;
+  padding: 4px 8px max(4px, env(safe-area-inset-bottom));
+}
+
+.item-menu {
+  flex: 1 1 0;
+  justify-content: center;
+}
+
+@media (min-width: 992px) {
+  .app {
+    margin: 0 auto;
+    max-width: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+.app {
+  border-radius: 0;
+  box-shadow: none;
 }
