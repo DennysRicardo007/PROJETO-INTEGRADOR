@@ -5,14 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mocau</title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="cadastro.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap%22 rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?famils:y=Poppinital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap%22 rel="stylesheet">
  
 
 </head>
 <body>
+
+    <a href="login.html" class="botao-voltar">
+
+        <i class="fa-solid fa-arrow-left"></i>
+    </a>
 
     <header>
 
@@ -21,6 +27,7 @@
         </h1>
 
         <h2>Cadastro</h2>
+        <p id="mensagem-cadastro"></p>
 
     </header>
 
@@ -29,54 +36,98 @@
  
             <p>
                 <label for="nome">Nome</label>
- 
-                <input
- 
-                type="nome"
-                id="nome"
-                name="Nome">
-               
+                
+                <div class="campo"> 
+                    <input
+                        type="nome"
+                        id="nome"
+                        name="Nome"
+                        placeholder="Digite seu nome">
+
+                    <i class="fa-regular fa-user"></i>
+                </div>
+                
+                
             </p>
  
             <p>
                 <label for="email">Email</label>
- 
-                <input type="email"
-                id="email"
-                name="email">
+                
+                <div class="campo">
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Digite seu email">
+
+                    <i class="fa-regular fa-envelope"></i>
+                </div>
+        
             </p>
+
         <div class="cep-bairro">
+
             <p>
                 <label for="cep">Cep</label>
- 
-                <input type="cep"
-                id="cep"
-                name="cep">
+                
+        <div class="campo">
+
+                    <input 
+                        type="cep"
+                        id="cep"
+                        name="cep"
+                        placeholder="Digite seu cep">
+                
+                <i class="fa-solid fa-location-dot"></i>
+
+        </div>
+                
             </p>
 
              <p>
                 <label for="bairro">Bairro</label>
- 
-                <input type="bairro"
-                id="bairro"
-                name="bairro">
+                
+        <div class="campo">
+
+                <input 
+                    type="bairro"
+                    id="bairro"
+                    name="bairro"
+                    placeholder="Digite seu bairro">
+
+                <i class="fa-solid fa-home"></i>
+        </div>     
+               
             </p>
         </div>    
              
              <p>
                 <label for="senha">Senha</label>
  
-                <input type="senha"
-                id="senha"
-                name="senha">
+                <div class="campo">
+                    <input 
+                    type="senha"
+                    id="senha"
+                    name="senha"
+                    placeholder="Digite uma senha">
+                
+                <i class="fa-regular fa-eye"></i>
+                </div>
+                
             </p>
 
              <p>
                 <label for="confirmar_senha">Confirmação de senha</label>
  
-                <input type="confirmar_senha"
-                id="confirmar_senha"
-                name="confirmar_senha">
+                <div class="campo">
+                    <input 
+                    type="senha"
+                    id="senha"
+                    name="senha"
+                    placeholder="Digite uma senha">
+                
+                <i class="fa-regular fa-eye"></i>
+                </div>
             </p>
 
         </div>
@@ -95,9 +146,14 @@
                 </label>
         </div>
 
-        <h2 class="cadastrar">Cadastrar</h2>
- 
+        <div class="cadastro-completo">
+            <a href="login.html" id="btn-cadastrar">Cadastrar</a>
+        </div>
+
+
     </main>
+    
+    <script src="script.js"></script>
     
 </body>
 </html>

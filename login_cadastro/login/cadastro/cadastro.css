@@ -24,6 +24,26 @@ header h2{
 }
 
 
+/*=====BOTÃO-VOLTAR=====*/
+
+.botao-voltar {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.botao-voltar:hover {
+    color: #0786db;
+}
 /*FORMULÁRIO*/ 
 .formulário2{ 
     font-size: 13px; 
@@ -156,7 +176,7 @@ header h2{
 
 
 /*CADASTRAR*/ 
-.cadastrar{ 
+.cadastro-completo a{ 
     display: block; 
     width: 100%; 
     max-width: 330px; 
@@ -167,9 +187,26 @@ header h2{
     font-size: 20px; 
     padding: 10px; 
     border-radius: 10px;
+    text-decoration: none;
 }
 
+#mensagem-cadastro {
+    display: none;
 
+    color: #198754;
+    background-color: #d1e7dd;
+
+    padding: 12px;
+    margin: 20px auto;
+
+    width: 80%;
+    max-width: 400px;
+
+    text-align: center;
+    font-weight: 600;
+
+    border-radius: 8px;
+}
 /*TABLET*/ 
 @media (max-width: 768px){
 
@@ -233,5 +270,58 @@ header h2{
         width: 100%;
         font-size: 18px;
     }
+}
 
+/*=====ESTILIZAÇÃO DO INPUT=====*/
+
+/* CENTRALIZA O FORMULÁRIO */
+.formulário2 {
+    width: 500px;
+    margin: 30px auto;
+}
+
+/* ESPAÇAMENTO DOS CAMPOS */
+.grupo-campo {
+    margin-bottom: 15px;
+}
+
+.grupo-campo label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* INPUT E ÍCONE */
+.campo {
+    position: relative;
+    width: 100%;
+}
+
+.campo input {
+    width: 100%;
+    height: 45px;
+    padding: 0 45px 0 12px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+}
+
+/* POSICIONA O ÍCONE DENTRO DO INPUT */
+.campo i {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    color: gray;
+    pointer-events: none;
+}
+
+/* CEP E BAIRRO LADO A LADO */
+.cep-bairro {
+    display: flex;
+    gap: 12px;
+}
+
+.cep-bairro .grupo-campo {
+    width: 50%;
 }

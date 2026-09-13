@@ -3,6 +3,25 @@
     font-family: "Poppins", sans-serif;
 }
 
+/*botao-voltar*/
+.botao-voltar {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.botao-voltar:hover {
+    color: #0786db;
+}
 /*cabeçalho*/
 header img{
     width: 200px;
@@ -145,6 +164,7 @@ header img{
     display: block;
     width: 267px;
     margin: 25px auto 0 auto;
+    text-decoration: none;
     text-align: center;
     background: rgb(30, 140, 230);
     color: white;
@@ -154,10 +174,10 @@ header img{
 }
 
 .cadastro{
-    text-align: center;
-    font-size: 12px;
-    color: blue;
-    margin-top: 10px;
+    display: block;
+    width: fit-content;
+    margin: 20px auto;
+    text-decoration: none;
 }
 
 /*======== CELULAR ========*/
@@ -269,4 +289,28 @@ header img{
         font-size: 15px;
         margin-top: 15px;
     }
+}
+
+/*=====ESTILIZAÇÃO DO INPUT=====*/
+.campo{
+    position: relative;
+    margin: 0 auto;
+    width: 350px;
+}
+
+.campo input{
+    width: 100%;
+    padding: 12px;
+    padding-right: 40px; 
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    
+}
+
+.campo i{
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: gray;
 }
