@@ -1,0 +1,316 @@
+/*GERAL*/
+*{
+    font-family: "Poppins", sans-serif;
+}
+
+/*botao-voltar*/
+.botao-voltar {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.botao-voltar:hover {
+    color: #0786db;
+}
+/*cabeçalho*/
+header img{
+    width: 200px;
+    height: 200px;
+    display: block;
+    margin: 0 auto;
+}
+ 
+/*LOGIN*/
+.login{
+    text-align: center;
+    font-size: 30px;
+}
+
+/*FORMULÁRIO*/
+.formulário1{
+    font-size: 13px;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.formulário1 input{
+    width: 350px;
+    height: 30px;
+    box-sizing: border-box;
+}
+
+.formulário1 label{
+    display: block;
+    width: 350px;
+    margin: 10px auto 5px auto;
+    text-align: left;
+}
+
+/*BOTÃO*/
+.checkbox-wrapper-46{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.checkbox-wrapper-46 input[type="checkbox"]{
+    display: none;
+    visibility: hidden;
+}
+
+.checkbox-wrapper-46 .cbx{
+    margin: 0;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+.checkbox-wrapper-46 .cbx span{
+    display: inline-block;
+    vertical-align: middle;
+    transform: translate3d(0, 0, 0);
+}
+
+.checkbox-wrapper-46 .cbx span:first-child{
+    position: relative;
+    width: 18px;
+    height: 18px;
+    border-radius: 3px;
+    transform: scale(1);
+    vertical-align: middle;
+    border: 1px solid #9098a9;
+    transition: all 0.2s ease;
+}
+
+.checkbox-wrapper-46 .cbx span:first-child svg{
+    position: absolute;
+    top: 3px;
+    left: 2px;
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 16px;
+    stroke-dashoffset: 16px;
+    transition: all 0.3s ease;
+    transition-delay: 0.1s;
+    transform: translate3d(0, 0, 0);
+}
+
+.checkbox-wrapper-46 .cbx span:first-child:before{
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: #506eec;
+    display: block;
+    transform: scale(0);
+    opacity: 1;
+    border-radius: 50%;
+}
+
+.checkbox-wrapper-46 .cbx span:last-child{
+    padding-left: 8px;
+}
+
+.checkbox-wrapper-46 .cbx:hover span:first-child{
+    border-color: #506eec;
+}
+
+.checkbox-wrapper-46 .inp-cbx:checked + .cbx span:first-child{
+    background: #506eec;
+    border-color: #506eec;
+    animation: wave-46 0.4s ease;
+}
+
+.checkbox-wrapper-46 .inp-cbx:checked + .cbx span:first-child svg{
+    stroke-dashoffset: 0;
+}
+
+.checkbox-wrapper-46 .inp-cbx:checked + .cbx span:first-child:before{
+    transform: scale(3.5);
+    opacity: 0;
+    transition: all 0.6s ease;
+}
+
+@keyframes wave-46{
+    50%{
+        transform: scale(0.9);
+    }
+}
+
+/*SENHA*/
+.senha{
+    font-size: 12px;
+    text-align: center;
+    color: blue;
+    margin: auto;
+    margin-top: 15px;
+}
+
+/*ENTRAR*/
+.entrar{
+    display: block;
+    width: 267px;
+    margin: 25px auto 0 auto;
+    text-decoration: none;
+    text-align: center;
+    background: rgb(30, 140, 230);
+    color: white;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.cadastro{
+    display: block;
+    width: fit-content;
+    margin: 20px auto;
+    text-decoration: none;
+}
+
+/*======== CELULAR ========*/
+@media(max-width: 600px){
+
+    header img{
+        width: 160px;
+        height: auto;
+        margin-top: 5%;
+    }
+
+    .login{
+        font-size: 26px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+    }
+
+    .formulário1{
+        width: 90%;
+        max-width: 400px;
+        font-size: 14px;
+        margin: 0 auto;
+    }
+
+    .formulário1 input{
+        width: 100%;
+        height: 40px;
+    }
+
+    .formulário1 label{
+        width: 100%;
+    }
+
+    .checkbox-wrapper-46{
+        margin-top: 20px;
+        font-size: 14px;
+    }
+
+    .senha{
+        font-size: 13px;
+        margin-top: 15px;
+    }
+
+    .entrar{
+        width: 90%;
+        max-width: 350px;
+        font-size: 20px;
+        padding: 12px;
+        margin-top: 20px;
+    }
+
+    .cadastro{
+        font-size: 13px;
+        margin-top: 10px;
+    }
+}
+
+/*======== TABLET ========*/
+@media(min-width: 601px) and (max-width: 1024px){
+
+    header img{
+        width: 190px;
+        height: auto;
+        margin-top: 20px;
+    }
+
+    .login{
+        font-size: 32px;
+        margin-top: 10px;
+        margin-bottom: 25px;
+    }
+
+    .formulário1{
+        width: 500px;
+        max-width: 90%;
+        font-size: 17px;
+        margin: 0 auto;
+    }
+
+    .formulário1 input{
+        width: 100%;
+        height: 45px;
+        font-size: 16px;
+    }
+
+    .formulário1 label{
+        width: 100%;
+    }
+
+    .checkbox-wrapper-46{
+        margin-top: 25px;
+        font-size: 17px;
+    }
+
+    .senha{
+        font-size: 15px;
+        margin-top: 20px;
+    }
+
+    .entrar{
+        width: 350px;
+        max-width: 90%;
+        font-size: 25px;
+        padding: 13px;
+        margin-top: 25px;
+    }
+
+    .cadastro{
+        font-size: 15px;
+        margin-top: 15px;
+    }
+}
+
+/*=====ESTILIZAÇÃO DO INPUT=====*/
+.campo{
+    position: relative;
+    margin: 0 auto;
+    width: 350px;
+}
+
+.campo input{
+    width: 100%;
+    padding: 12px;
+    padding-right: 40px; 
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    
+}
+
+.campo i{
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: gray;
+}
