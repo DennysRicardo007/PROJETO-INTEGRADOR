@@ -8,6 +8,7 @@
 let mapa = null;
 let geocoder = null;
 let mapaJaCarregado = false;
+let marcadorSelecionado = null;
 
 let atualizandoEnderecoTimeout = null;
 let ultimaRequisicaoId = 0;
@@ -31,7 +32,11 @@ function iniciarMapaOcorrencia() {
     disableDefaultUI: true,
     zoomControl: true,
     clickableIcons: false,
-    gestureHandling: 'greedy' // permite arrastar com 1 dedo no mobile
+    gestureHandling: 'greedy',
+    styles: [{
+      featureType: 'poi',
+      stylers: [{ visibility: 'off' }]
+    }]
   });
 
   geocoder = new google.maps.Geocoder();
@@ -44,6 +49,26 @@ function iniciarMapaOcorrencia() {
     const centro = mapa.getCenter();
     coordenadaSelecionada = { lat: centro.lat(), lng: centro.lng() };
     agendarBuscaDeEndereco(coordenadaSelecionada);
+  });
+
+  mapa.addListener('click', function (evento) {
+    coordenadaSelecionada = {
+      lat: evento.latLng.lat(),
+      lng: evento.latLng.lng()
+    };
+
+    if (marcadorSelecionado) {
+      marcadorSelecionado.setMap(null);
+    }
+
+    marcadorSelecionado = new google.maps.Marker({
+      map: mapa,
+      position: coordenadaSelecionada,
+      title: 'Local da ocorrência'
+    });
+
+    mapa.panTo(coordenadaSelecionada);
+    agendarBuscaDeEndereco(coordenadaSelecionada, 0);
   });
 
   mapa.addListener('tilesloaded', esconderCarregandoMapa);
@@ -304,16 +329,27 @@ document.addEventListener('DOMContentLoaded', function () {
         longitude: coordenadaSelecionada.lng
       };
 
+      const categoria = window.localStorage.getItem('mocal_problema_selecionado') || 'outros-problemas';
+      let ocorrencias = [];
+
       try {
         window.localStorage.setItem(CHAVE_LOCAL_STORAGE, JSON.stringify(endereco));
+        ocorrencias = JSON.parse(window.localStorage.getItem('mocal_ocorrencias')) || [];
+        ocorrencias.push({
+          id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+          ...endereco,
+          categoria,
+          descricao: window.localStorage.getItem('mocal_descricao_ocorrencia') || '',
+          criadaEm: new Date().toISOString()
+        });
+        window.localStorage.setItem('mocal_ocorrencias', JSON.stringify(ocorrencias));
       } catch (erro) {
         // localStorage pode falhar em modo privado/navegação restrita
         console.warn('Não foi possível salvar no localStorage:', erro);
+        return;
       }
 
-      // TODO: atualizar para a próxima etapa real do fluxo de registro
-      // (ex: tela de detalhes/foto da ocorrência) quando ela existir.
-      window.location.href = 'detalhes-ocorrencia.html';
+      window.location.href = 'mapa.html';
     });
   }
 
