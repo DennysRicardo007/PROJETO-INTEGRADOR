@@ -1,53 +1,48 @@
-/**
- * Servidor simples para servir a chave do Google Maps com segurança
- * Use este arquivo se quiser proteger a chave no servidor
- * 
- * Instalação:
- * npm install express dotenv cors
- * 
- * Execução:
- * node server.js
- */
-
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
 
-// Middleware
+// Middlewares
 app.use(cors());
-app.use(express.static(path.join(__dirname)));
 
+// Serve todos os arquivos estáticos (HTML, CSS, JS, imagens) da raiz do projeto
+app.use(express.static(__dirname));
+
+// Rota principal: entrega o index.html na raiz '/'
 app.get('/', (req, res) => {
-  res.redirect('/mapa.html');
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Rota protegida para obter a chave do Google Maps
 app.get('/api/maps-key', (req, res) => {
-  // Verificar origem (referer) para segurança adicional
   const referer = req.get('referer');
-  const allowedOrigins = [
-    'http://localhost',
-    'http://localhost:3000',
-    'http://localhost:5173', // Vite
-    'http://127.0.0.1'
-  ];
 
-  const isAllowed = allowedOrigins.some(origin => referer?.startsWith(origin));
+  // Permite localhost e domínios da Vercel / Domínio Próprio
+  const isAllowed = !referer || 
+    referer.includes('localhost') || 
+    referer.includes('127.0.0.1') || 
+    referer.includes('vercel.app') || 
+    referer.includes(req.get('host'));
 
   if (!isAllowed && process.env.NODE_ENV === 'production') {
     return res.status(403).json({ error: 'Origem não autorizada' });
   }
 
   res.json({
-    key: process.env.VITE_GOOGLE_MAPS_API_KEY
+    key: process.env.VITE_GOOGLE_MAPS_API_KEY || process.env.GOOGLE_MAPS_API_KEY
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`🗺️ Servidor rodando em http://localhost:${PORT}`);
-  console.log('Use /api/maps-key para obter a chave do Google Maps');
-});
+// Inicialização do servidor para ambiente local
+const PORT = process.env.PORT || 3000;
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`🗺️ Servidor rodando em http://localhost:${PORT}`);
+  });
+}
+
+// Exporta o aplicativo Express para ser consumido pela Vercel como Serverless Function
+module.exports = app;
