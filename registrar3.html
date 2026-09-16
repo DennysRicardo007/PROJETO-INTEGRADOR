@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>MOCAU · Registrar Ocorrência</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+
+  <!-- Estilo global do projeto -->
+  <link rel="stylesheet" href="/css/registrar3.css">
+</head>
+
+<body>
+
+  <div class="app">
+
+    <!-- CABEÇALHO -->
+    <header class="app-header">
+      <button id="btnVoltar" class="icon-btn icon-btn--back" aria-label="Voltar">
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+      <h1 class="app-header__title">Registrar</h1>
+      <button class="icon-btn icon-btn--avatar" aria-label="Perfil">
+        <i class="fa-solid fa-circle-user"></i>
+      </button>
+    </header>
+
+    <main class="app-content">
+
+      <!-- COLUNA: MAPA E LOCALIZAÇÃO -->
+      <div class="content-col content-col--map">
+
+        <!-- MAPA -->
+        <section class="map-section">
+          <div id="map" class="map"></div>
+          <button id="btnMinhaLocalizacao" class="map-locate-btn" type="button">
+            <i class="fa-solid fa-location-crosshairs"></i>
+            <span>Usar minha localização</span>
+          </button>
+        </section>
+
+        <!-- LOCALIZAÇÃO -->
+        <section class="location-card">
+          <div class="location-card__icon">
+            <i class="fa-solid fa-location-dot"></i>
+          </div>
+          <div class="location-card__text">
+            <p class="location-card__label">Local da ocorrência</p>
+            <p id="enderecoLinha1" class="location-card__address">Rua Açuper, 331</p>
+            <p id="enderecoLinha2" class="location-card__sub">Alto Santa Terezinha</p>
+            <p id="enderecoLinha3" class="location-card__sub">Recife - Pernambuco</p>
+            <p id="coordsInfo" class="location-card__coords">Toque no mapa para ajustar o ponto</p>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- COLUNA: DESCRIÇÃO, ANEXOS E ENVIO -->
+      <div class="content-col content-col--form">
+
+        <!-- COMENTÁRIO -->
+        <section class="block">
+          <h2 class="block__title">Descreva o ocorrido</h2>
+          <textarea id="descricao" class="textarea" maxlength="500" placeholder="Conte o que aconteceu..."></textarea>
+          <p class="char-counter"><span id="contadorChars">0</span>/500</p>
+        </section>
+
+        <!-- ANEXOS -->
+        <section class="block">
+          <h2 class="block__title">
+            <i class="fa-solid fa-paperclip" aria-hidden="true"></i>
+            Anexos
+          </h2>
+
+          <div class="anexos-botoes">
+            <button type="button" id="btnAddFoto" class="anexo-btn">
+              <i class="fa-solid fa-camera"></i>
+              <span>Adicionar foto</span>
+            </button>
+            <button type="button" id="btnAddVideo" class="anexo-btn">
+              <i class="fa-solid fa-video"></i>
+              <span>Adicionar vídeo</span>
+            </button>
+          </div>
+
+          <input type="file" id="inputFoto" accept=".jpg,.jpeg,.png,.webp" multiple hidden>
+          <input type="file" id="inputVideo" accept=".mp4,.webm,.mov" multiple hidden>
+
+          <div id="previewGrid" class="preview-grid">
+            <p id="previewVazio" class="preview-vazio">
+              <i class="fa-regular fa-images"></i>
+              Nenhum anexo adicionado
+            </p>
+          </div>
+        </section>
+
+        <!-- BOTÃO REGISTRAR -->
+        <button id="btnRegistrar" type="button" class="btn-registrar">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span>Registrar ocorrência</span>
+        </button>
+
+      </div>
+
+    </main>
+
+    <!-- BARRA DE NAVEGAÇÃO -->
+    <nav class="bottom-nav">
+      <a href="mapa.html" class="nav-item">
+        <i class="fa-solid fa-map"></i>
+        <span>Mapa</span>
+      </a>
+      <a href="registrar.html" class="nav-item nav-item--fab nav-item--active">
+        <span class="nav-fab"><i class="fa-solid fa-plus"></i></span>
+        <span>Registrar</span>
+      </a>
+      <a href="index.html" class="nav-item">
+        <i class="fa-solid fa-house"></i>
+        <span>Início</span>
+      </a>
+      <a href="historico.html" class="nav-item">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <span>Histórico</span>
+      </a>
+      <a href="comunidade.html" class="nav-item">
+        <i class="fa-solid fa-users"></i>
+        <span>Comunidade</span>
+      </a>
+    </nav>
+
+  </div>
+  <!-- MODAL DE CONFIRMAÇÃO -->
+  <div id="modalSucesso" class="modal-overlay" hidden>
+    <div class="modal-card">
+      <div class="modal-card__icon"><i class="fa-solid fa-circle-check"></i></div>
+      <h3>Ocorrência registrada com sucesso!</h3>
+      <p id="modalProtocolo" class="modal-card__protocolo">Ocorrência #MOCAU-00125</p>
+      <p class="modal-card__msg">Obrigado por contribuir com o MOCAU.</p>
+      <button id="btnFecharModal" class="btn-registrar">Concluir</button>
+    </div>
+  </div>
+  <!-- Leaflet -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+  <!-- Scripts do projeto -->
+  <script src="/js/script.js"></script>
+  <script src="/js/registrar3.js" defer></script>
+
+</body>
+
+</html>
