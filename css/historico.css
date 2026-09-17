@@ -13,7 +13,7 @@
     --filter-blue: #0D6EFD;
     --blue-light: #E7F2FD;
 
-    --prototype-bg: #FBFFFE;
+    --prototype-bg: #FFFFFF;
     --prototype-card: #F5F5F5;
     --prototype-nav: #0D6EFD;
 
@@ -62,7 +62,7 @@ button {
     width: 100%;
     min-height: 100vh;
 
-    background: var(--white);
+    background: #FFFFFF;
     overflow-x: hidden;
 }
 
