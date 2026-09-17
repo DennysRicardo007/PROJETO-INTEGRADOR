@@ -14,7 +14,7 @@
 :root {
   --cor-fundo: #ffffff;
   --cor-campo: #d8d8d8;
-  --cor-azul-principal: #1687e8;
+  --cor-azul-principal: #0D6EFD;
   --cor-azul-claro: #d6e8ff;
   --cor-vermelho: #ff2525;
   --cor-texto-principal: #111111;
@@ -227,6 +227,10 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.preview-anexo[hidden] {
+  display: none;
 }
 
 /* Botão Próximo -------------------------------------------------------------- */

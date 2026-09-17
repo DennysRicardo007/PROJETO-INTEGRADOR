@@ -8,14 +8,14 @@
 }
 
 :root {
-    --blue: #0C8CE9;
-    --blue-dark: #087DCE;
-    --filter-blue: #4665E0;
+    --blue: #0D6EFD;
+    --blue-dark: #0B5ED7;
+    --filter-blue: #0D6EFD;
     --blue-light: #E7F2FD;
 
     --prototype-bg: #FBFFFE;
     --prototype-card: #F5F5F5;
-    --prototype-nav: #CAE0FE;
+    --prototype-nav: #0D6EFD;
 
     --text: #242629;
     --muted: #666666;
@@ -208,7 +208,7 @@ button {
 }
 
 .filter-button:hover {
-    background: #3B58D1;
+    background: #0D6EFD;
 }
 
 .filter-button:active,

@@ -1,6 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
   const botaoVoltar = document.getElementById('botaoVoltar');
   const botaoProximo = document.getElementById('botaoProximo');
+  const arquivoAnexo = document.getElementById('arquivoAnexo');
+  const previewAnexo = document.getElementById('previewAnexo');
+  const rotuloAnexo = document.querySelector('.rotulo-anexo');
+  let urlPreview = null;
 
   if (!botaoVoltar) {
     return;
@@ -29,6 +33,28 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       window.location.href = './mapa_ocorrencia.html';
+    });
+  }
+
+  if (arquivoAnexo && previewAnexo && rotuloAnexo) {
+    arquivoAnexo.addEventListener('change', function () {
+      const arquivo = arquivoAnexo.files && arquivoAnexo.files[0];
+
+      if (!arquivo) {
+        previewAnexo.hidden = true;
+        previewAnexo.removeAttribute('src');
+        rotuloAnexo.hidden = false;
+        return;
+      }
+
+      if (urlPreview) {
+        URL.revokeObjectURL(urlPreview);
+      }
+
+      urlPreview = URL.createObjectURL(arquivo);
+      previewAnexo.src = urlPreview;
+      previewAnexo.hidden = false;
+      rotuloAnexo.hidden = true;
     });
   }
 });

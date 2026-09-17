@@ -1,91 +1,170 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mocau</title>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="css/login.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <title>Mocau</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e0f2fe 0%, #f4f6f9 100%);
+      min-height: 100vh;
+    }
+
+    /* Card estilo App Mobile */
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      border: none;
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      background-color: #ffffff;
+      position: relative;
+    }
+
+    .btn-voltar {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #495057;
+      background-color: #f8f9fa;
+      transition: background-color 0.2s;
+    }
+
+    .btn-voltar:hover {
+      background-color: #e9ecef;
+      color: #0d6efd;
+    }
+
+    .logo-img {
+      max-width: 120px;
+      height: auto;
+    }
+
+    /* Ícones dentro dos campos de input */
+    .input-group-text {
+      background-color: #f8f9fa;
+      border-left: none;
+      color: #6c757d;
+      cursor: pointer;
+    }
+
+    .form-control {
+      border-right: none;
+      padding: 12px 16px;
+      background-color: #f8f9fa;
+    }
+
+    .form-control:focus {
+      background-color: #fff;
+      box-shadow: none;
+      border-color: #dee2e6;
+    }
+
+    .form-control:focus + .input-group-text {
+      background-color: #fff;
+      border-color: #dee2e6;
+    }
+
+    .btn-primary-custom {
+      border-radius: 12px;
+      padding: 12px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .btn-primary-custom:active {
+      transform: scale(0.98);
+    }
+  </style>
 </head>
-<body>
-    
-    <a href="index.html" class="botao-voltar">
+<body class="d-flex align-items-center justify-content-center p-3">
 
-        <i class="fa-solid fa-arrow-left"></i>
+  <div class="card login-card p-4 p-sm-5">
+    
+    <!-- BOTÃO VOLTAR -->
+    <a href="index.html" class="btn-voltar text-decoration-none" aria-label="Voltar">
+      <i class="fa-solid fa-arrow-left"></i>
     </a>
 
-    <header>
+    <!-- LOGO E TÍTULO -->
+    <div class="text-center mt-3 mb-4">
+      <img src="/img/logo_MOCAL.png" alt="Logo Mocau" class="logo-img mb-3">
+      <h2 class="h4 fw-bold text-dark mb-0">Entrar na Conta</h2>
+    </div>
 
-        <img src="/img/logo_MOCAL.png" alt="Logo Mocau">
-
-    </header>
-
-    <h2 class="login">Login</h2>
-
-    <main>
-
-        <div class="formulário1">
-
-        <p>
-                <label for="email">Email</label>
-
-            <div class="campo">
-                <input 
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="Digite seu email">
-                
-                
-                <i class="fa-regular fa-envelope"></i>
-            </div>  
-
-        </p>
-
-        <p>
-                <label for="senha">Senha</label>
-
-            <div class="campo">
-                <input 
-                    type="senha"
-                    id="senha"
-                    name="senha"
-                    placeholder="Digite sua senha">
-
-                <i class="fa-regular fa-eye"></i>
-            </div>
-                
-        </p>
-
-        </div>    
-
-         <div class="checkbox-wrapper-46">
-
-                <input type="checkbox" id="cbx-46" class="inp-cbx" />
-
-                <label for="cbx-46" class="cbx"
-
-                    ><span>
-                     <svg viewBox="0 0 12 10" height="10px" width="12px">
-                        
-                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline></svg></span
-                             ><span>Me lembre</span>
-                </label>
+    <!-- FORMULÁRIO -->
+    <form action="home.html" method="GET">
+      
+      <!-- CAMPO EMAIL -->
+      <div class="mb-3">
+        <label for="email" class="form-label small fw-medium text-secondary">Email</label>
+        <div class="input-group">
+          <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" required>
+          <span class="input-group-text">
+            <i class="fa-regular fa-envelope"></i>
+          </span>
         </div>
+      </div>
 
-            <p class="senha">Esqueceu a senha?</p>
+      <!-- CAMPO SENHA -->
+      <div class="mb-3">
+        <label for="senha" class="form-label small fw-medium text-secondary">Senha</label>
+        <div class="input-group">
+          <input type="password" class="form-control" id="senha" name="senha" placeholder="Digite sua senha" required>
+          <span class="input-group-text">
+            <i class="fa-regular fa-eye"></i>
+          </span>
+        </div>
+      </div>
 
-            <a class="entrar" href="/home.html">Entrar</a>
+      <!-- OPÇÕES: OPÇÃO LEMBRAR & ESQUECEU A SENHA -->
+      <div class="d-flex align-items-center justify-content-between mb-4 fs-7">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="lembreme">
+          <label class="form-check-label small text-muted" for="lembreme">
+            Lembre de mim
+          </label>
+        </div>
+        <a href="#" class="small text-primary text-decoration-none fw-medium">Esqueceu a senha?</a>
+      </div>
 
-            <a class="cadastro" href="cadastro.html">Cadastre-se</a>
-    </main>
+      <!-- BOTÃO ENTRAR -->
+      <div class="d-grid mb-3">
+        <button type="submit" class="btn btn-primary btn-primary-custom shadow-sm">
+          Entrar
+        </button>
+      </div>
 
+      <!-- LINK CADASTRO -->
+      <div class="text-center">
+        <span class="small text-muted">Não tem uma conta?</span>
+        <a href="cadastro.html" class="small text-primary text-decoration-none fw-bold ms-1">Cadastre-se</a>
+      </div>
+
+    </form>
+
+  </div>
+
+  <!-- Bootstrap 5 JavaScript Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

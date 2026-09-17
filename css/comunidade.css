@@ -8,7 +8,7 @@
 :root {
   --cor-fundo: #ffffff;
   --cor-card: #f0f0f0;
-  --cor-azul-principal: #1687e8;
+  --cor-azul-principal: #0D6EFD;
   --cor-azul-claro: #d6e8ff;
   --cor-vermelho: #ff2525;
   --cor-texto-principal: #111111;
@@ -137,7 +137,7 @@ body {
     left: 0;
     right: 0;
     height: 2.5px;
-    background: #2f6fed;
+    background: #0D6EFD;
     border-radius: 2px;
 }
 
@@ -362,7 +362,7 @@ body {
     font-size: 14px;
     font-weight: 600;
     color: #1a1a1a;
-    cursor: pointer;
+    cursor: default;
     width: calc(100% - 40px);
     min-height: 48px;
 }
@@ -394,8 +394,8 @@ body {
 }
 
 .feedback-btn:hover {
-    border-color: #2f6fed;
-    color: #2f6fed;
+    border-color: #0D6EFD;
+    color: #0D6EFD;
     background: #f0f5ff;
 }
 
@@ -460,7 +460,7 @@ body {
 
 .rodape__item--ativo {
     background: #dbe8ff;
-    color: #2f6fed;
+    color: #0D6EFD;
     font-weight: 700;
     padding: 6px 12px;
     border-radius: 12px;
@@ -564,7 +564,7 @@ body {
     }
 
     .bottom-nav .nav-item.active {
-        color: #2f6fed;
+        color: #0D6EFD;
         font-weight: 700;
     }
 
@@ -635,7 +635,7 @@ body {
     }
 
     .bottom-nav .nav-item.active {
-        color: #2f6fed;
+        color: #0D6EFD;
         font-weight: 700;
     }
 
@@ -770,6 +770,6 @@ body {
 }
 
 .bottom-nav .nav-item.active {
-    color: #2f6fed;
+    color: #0D6EFD;
     font-weight: 700;
 }

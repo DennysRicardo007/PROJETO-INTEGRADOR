@@ -1,6 +1,6 @@
 :root {
   --mocau-red: #EF3E43;
-  --mocau-blue: #2F6FED;
+  --mocau-blue: #0D6EFD;
   --mocau-blue-light: #E9F0FF;
   --mocau-yellow: #F2DA4E;
   --mocau-yellow-light: #FBF3C9;
@@ -141,8 +141,8 @@ button {
   left: 0;
   right: 0;
   height: var(--nav-height);
-  background: var(--bg-app);
-  border-top: 1px solid var(--border-color);
+  background: #0D6EFD;
+  border-top: 1px solid #0D6EFD;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -158,7 +158,7 @@ button {
   justify-content: center;
   gap: 3px;
   text-decoration: none;
-  color: var(--text-muted);
+  color: #ffffff;
   font-size: 11px;
   font-weight: 500;
 }
@@ -168,7 +168,7 @@ button {
 }
 
 .nav-item--active {
-  color: var(--mocau-blue);
+  color: #ffffff;
 }
 
 .nav-item--fab {
@@ -720,8 +720,8 @@ button {
     justify-content: center;
     gap: 88px;
     padding: 14px 24px calc(14px + env(safe-area-inset-bottom, 0px));
-    background: var(--mocau-blue-light);
-    border-top: 1px solid var(--border-color);
+    background: #0D6EFD;
+    border-top: 1px solid #0D6EFD;
   }
 
   .nav-item {

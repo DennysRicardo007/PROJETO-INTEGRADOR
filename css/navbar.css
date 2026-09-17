@@ -11,8 +11,8 @@
     min-height: 64px;
     height: auto;
     padding: 4px 8px max(4px, env(safe-area-inset-bottom));
-    background: #CAE0FE;
-    border-top: 1px solid #B8D2F0;
+    background: #0D6EFD;
+    border-top: 1px solid #0D6EFD;
     border-radius: 0;
     box-shadow: none;
 }
@@ -26,7 +26,7 @@
     min-width: 0;
     min-height: 44px;
     padding: 4px 2px;
-    color: #242424;
+    color: #ffffff;
     font: 600 11px/1.2 "Segoe UI", Arial, sans-serif;
     text-align: center;
     text-decoration: none;
@@ -38,7 +38,7 @@
 }
 
 .bottom-nav .nav-item:hover {
-    background: #f3f3f3;
+    background: rgba(255, 255, 255, 0.16);
 }
 
 .bottom-nav .nav-item:active {
@@ -56,7 +56,7 @@
 }
 
 .bottom-nav .nav-item.active {
-    color: #0C8CE9;
+    color: #ffffff;
     font-weight: 800;
 }
 
@@ -65,6 +65,6 @@
 }
 
 .bottom-nav .nav-item:focus-visible {
-    outline: 3px solid rgba(47, 169, 240, 0.35);
+    outline: 3px solid rgba(255, 255, 255, 0.7);
     outline-offset: 2px;
 }
