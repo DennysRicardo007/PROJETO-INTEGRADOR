@@ -1,0 +1,336 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+}
+
+/* ===== CONTAINER PRINCIPAL - DESKTOP ===== */
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #fff;
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 90px;
+}
+
+/* ===== CABEÇALHO ===== */
+.cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px 16px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.btn-voltar {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.btn-voltar:hover {
+    background: #fef2f2;
+}
+
+.cabecalho__titulo {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-align: center;
+    flex: 1;
+}
+
+.cabecalho__perfil {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.cabecalho__perfil:hover {
+    transform: scale(1.05);
+}
+
+.cabecalho__perfil img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ===== CONTEÚDO ===== */
+.conteudo {
+    padding: 32px 40px 0;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* ===== BARRA DE BUSCA ===== */
+.busca-container {
+    position: relative;
+    margin-bottom: 32px;
+}
+
+.campo-busca {
+    width: 100%;
+    padding: 16px 20px 16px 56px;
+    background: #f5f6f8;
+    border: 1.5px solid #e8e8e8;
+    border-radius: 14px;
+    font-size: 16px;
+    color: #333;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.campo-busca::placeholder {
+    color: #999;
+}
+
+.campo-busca:focus {
+    border-color: #2f6fed;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(47, 111, 237, 0.1);
+}
+
+.icone-busca {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* ===== LISTA DE BAIRROS - GRID DESKTOP ===== */
+.lista-bairros {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.item-bairro {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    background: #f5f6f8;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.item-bairro:hover {
+    background: #eef1f5;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.item-bairro:active {
+    transform: translateY(0);
+}
+
+.item-bairro--ativo {
+    border-color: #2f6fed;
+    background: #eaf2ff;
+}
+
+/* ===== IMAGEM DO BAIRRO - CÍRCULO ===== */
+.item-bairro__imagem {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #e3f2fd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.item-bairro__imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ===== FOTO DE PERFIL SOBREPOSTA (item ativo) ===== */
+.item-bairro__perfil-ativo {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2.5px solid #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+.item-bairro__perfil-ativo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-bairro__texto {
+    flex: 1;
+    min-width: 0;
+}
+
+.item-bairro__nome {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+}
+
+.item-bairro__subnome {
+    font-size: 14px;
+    color: #555;
+    font-weight: 500;
+}
+
+.item-bairro__seta {
+    flex-shrink: 0;
+    color: #888;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.item-bairro:hover .item-bairro__seta {
+    transform: translateX(3px);
+    color: #2f6fed;
+}
+
+/* ===== BOTÃO VER TODOS ===== */
+.btn-container {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-ver-todos {
+    min-width: 280px;
+    padding: 16px 32px;
+    background: #1E88E5;
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 0.3px;
+}
+
+.btn-ver-todos:hover {
+    background: #1976D2;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(30, 136, 229, 0.35);
+}
+
+.btn-ver-todos:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 10px rgba(30, 136, 229, 0.25);
+}
+
+/* ===== RODAPÉ ===== */
+.rodape {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #D6E8FF;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    align-items: center;
+    padding: 14px 0 18px;
+}
+
+.rodape__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    font-size: 12px;
+    color: #444;
+    cursor: pointer;
+    padding: 8px 20px;
+    border-radius: 12px;
+    transition: all 0.2s;
+    font-weight: 500;
+    min-width: 80px;
+}
+
+.rodape__item:hover {
+    background: rgba(255,255,255,0.5);
+}
+
+.rodape__item--ativo {
+    color: #1565C0;
+    font-weight: 700;
+}
+
+.rodape__item svg {
+    transition: transform 0.2s;
+}
+
+.rodape__item:hover svg {
+    transform: scale(1.1);
+}
+
+/* ===== RESPONSIVO - TELAS MENORES ===== */
+@media (max-width: 768px) {
+    .app-container {
+        max-width: 100%;
+    }
+    
+    .cabecalho {
+        padding: 16px 20px 12px;
+    }
+    
+    .cabecalho__titulo {
+        font-size: 18px;
+    }
+    
+    .conteudo {
+        padding: 20px;
+    }
+    
+    .lista-bairros {
+        grid-template-columns: 1fr;
+    }
+    
+    .rodape {
+        gap: 8px;
+        padding: 10px 0 14px;
+    }
+    
+    .rodape__item {
+        padding: 6px 10px;
+        min-width: auto;
+        font-size: 11px;
+    }
+}

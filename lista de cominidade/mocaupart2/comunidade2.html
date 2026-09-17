@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Comunidades</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+<div class="app-container">
+    
+    <header class="cabecalho">
+        <button class="btn-voltar" aria-label="Voltar">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E53935" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+        </button>
+        <h1 class="cabecalho__titulo">Lista de comunidades</h1>
+        <div class="cabecalho__perfil">
+            <img src="marta.png" alt="Foto de perfil"/>
+        </div>
+    </header>
+    
+    <main class="conteudo">
+        
+        <!-- Barra de Busca -->
+        <div class="busca-container">
+            <input 
+                type="text" 
+                class="campo-busca" 
+                id="campo-busca"
+                placeholder="Buscar bairros"
+                aria-label="Buscar bairros"
+            >
+            <svg class="icone-busca" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="M21 21l-4.35-4.35"/>
+            </svg>
+        </div>
+        
+        <!-- Lista de Bairros -->
+        <ul class="lista-bairros" id="lista-bairros">
+            
+            <li class="item-bairro item-bairro--ativo" data-nome="Alta Santa Terezinha">
+                <div class="item-bairro__imagem">
+                    <img src="santa teresinha.jpg" alt="Alta Santa Terezinha"/>
+                    <div class="item-bairro__perfil-ativo">
+                        <img src="marta.png" alt="Você está aqui"/>
+                    </div>
+                </div>
+                <div class="item-bairro__texto">
+                    <p class="item-bairro__nome">Bairro</p>
+                    <p class="item-bairro__subnome">Alta Santa Terezinha</p>
+                </div>
+                <svg class="item-bairro__seta" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"/>
+                </svg>
+            </li>
+            
+            <li class="item-bairro" data-nome="Casa Amarela">
+                <div class="item-bairro__imagem">
+                    <img src="casa amarela.jpg" alt="Casa Amarela"/>
+                </div>
+                <div class="item-bairro__texto">
+                    <p class="item-bairro__nome">Bairro</p>
+                    <p class="item-bairro__subnome">Casa Amarela</p>
+                </div>
+                <svg class="item-bairro__seta" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"/>
+                </svg>
+            </li>
+            
+            <li class="item-bairro" data-nome="Afogados">
+                <div class="item-bairro__imagem">
+                    <img src="afogados.jpg" alt="Afogados"/>
+                </div>
+                <div class="item-bairro__texto">
+                    <p class="item-bairro__nome">Bairro</p>
+                    <p class="item-bairro__subnome">Afogados</p>
+                </div>
+                <svg class="item-bairro__seta" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"/>
+                </svg>
+            </li>
+            
+            <li class="item-bairro" data-nome="Torre">
+                <div class="item-bairro__imagem">
+                    <img src="torre.jpg" alt="Torre"/>
+                </div>
+                <div class="item-bairro__texto">
+                    <p class="item-bairro__nome">Bairro</p>
+                    <p class="item-bairro__subnome">Torre</p>
+                </div>
+                <svg class="item-bairro__seta" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"/>
+                </svg>
+            </li>
+            
+            <li class="item-bairro" data-nome="Piedade">
+                <div class="item-bairro__imagem">
+                    <img src="piedade.jpg" alt="Piedade"/>
+                </div>
+                <div class="item-bairro__texto">
+                    <p class="item-bairro__nome">Bairro</p>
+                    <p class="item-bairro__subnome">Piedade</p>
+                </div>
+                <svg class="item-bairro__seta" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"/>
+                </svg>
+            </li>
+            
+        </ul>
+        
+        <!-- Botão Ver Todos -->
+        <div class="btn-container">
+            <button class="btn-ver-todos" type="button" id="btn-ver-todos">
+                Ver todos os bairros
+            </button>
+        </div>
+        
+    </main>
+    
+    <nav class="rodape">
+        
+        <button class="rodape__item">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4zM8 2v16M16 6v16"/>
+            </svg>
+            <span>Mapa</span>
+        </button>
+        
+        <button class="rodape__item">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 5v14M5 12h14"/>
+            </svg>
+            <span>Registrar</span>
+        </button>
+        
+        <button class="rodape__item">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            <span>Início</span>
+        </button>
+        
+        <button class="rodape__item">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <span>Histórico</span>
+        </button>
+        
+        <button class="rodape__item rodape__item--ativo">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            <span>Comunidade</span>
+        </button>
+        
+    </nav>
+    
+</div>
+<script src="parte2.js"></script>
+</body>
+</html>
