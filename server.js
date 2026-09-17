@@ -15,7 +15,7 @@ app.use(express.static(__dirname));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
-
+//aa
 // Rota para obter a chave do Google Maps
 app.get('/api/maps-key', (req, res) => {
   const apiKey = process.env.VITE_GOOGLE_MAPS_API_KEY || process.env.GOOGLE_MAPS_API_KEY;
