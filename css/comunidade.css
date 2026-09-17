@@ -21,7 +21,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #f0f2f5;
+    background-color: #ffffff;
     overflow-x: hidden;
 }
 
@@ -325,7 +325,8 @@ body {
     position: static;
     padding: 3px 8px;
     font-size: 10px;
-    white-space: normal;
+    flex: 0 0 auto;
+    white-space: nowrap;
     text-align: center;
 }
 
