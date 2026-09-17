@@ -1,0 +1,794 @@
+:root {
+  --mocau-red: #EF3E43;
+  --mocau-blue: #2F6FED;
+  --mocau-blue-light: #E9F0FF;
+  --mocau-yellow: #F2DA4E;
+  --mocau-yellow-light: #FBF3C9;
+
+  --bg-outer: #ECEDEF;
+  --bg-app: #FFFFFF;
+  --bg-soft: #F5F6F8;
+
+  --text-primary: #1B1C1F;
+  --text-secondary: #6E7480;
+  --text-muted: #9CA0AA;
+
+  --border-color: #E7E8EC;
+  --radius-lg: 18px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+  --radius-pill: 999px;
+
+  --shadow-soft: 0 2px 10px rgba(20, 20, 30, 0.06);
+  --shadow-card: 0 4px 16px rgba(20, 20, 30, 0.08);
+
+  --app-max-width: 410px;
+  --header-height: 60px;
+  --nav-height: 70px;
+
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg-outer);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* ==========================================================================
+   Estrutura do app (usada por todas as telas do MOCAU)
+   ========================================================================== */
+
+.app {
+  max-width: var(--app-max-width);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: var(--bg-app);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: var(--shadow-soft);
+}
+
+@media (min-width: 480px) {
+  body {
+    padding: 24px 0;
+  }
+  .app {
+    min-height: calc(100vh - 48px);
+    border-radius: 28px;
+    overflow: hidden;
+  }
+}
+
+/* Cabeçalho --------------------------------------------------------------- */
+
+.app-header {
+  height: var(--header-height);
+  min-height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  background: var(--bg-app);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.app-header__title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.1px;
+}
+
+.icon-btn {
+  border: none;
+  background: transparent;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  padding: 0;
+}
+
+.icon-btn--back {
+  color: var(--mocau-red);
+  font-size: 18px;
+}
+
+.icon-btn--back:active {
+  background: rgba(239, 62, 67, 0.1);
+}
+
+.icon-btn--avatar {
+  font-size: 30px;
+  color: var(--text-secondary);
+}
+
+/* Conteúdo rolável ---------------------------------------------------------- */
+
+.app-content {
+  flex: 1;
+  padding: 14px 16px calc(var(--nav-height) + 24px);
+  overflow-y: auto;
+}
+
+/* Barra de navegação inferior ---------------------------------------------- */
+
+.bottom-nav {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-height);
+  background: var(--bg-app);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px));
+  z-index: 30;
+}
+
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.nav-item i {
+  font-size: 18px;
+}
+
+.nav-item--active {
+  color: var(--mocau-blue);
+}
+
+.nav-item--fab {
+  transform: translateY(-6px);
+}
+
+.nav-fab {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-pill);
+  background: var(--mocau-blue);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 6px 14px rgba(47, 111, 237, 0.35);
+  margin-bottom: 2px;
+}
+
+/* ==========================================================================
+   Elementos reutilizáveis em várias telas
+   ========================================================================== */
+
+.block {
+  margin-top: 20px;
+}
+
+.block__title {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-primary);
+}
+
+.btn-registrar {
+  width: 100%;
+  margin-top: 22px;
+  border: none;
+  background: var(--mocau-blue);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 15px 18px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(47, 111, 237, 0.28);
+}
+
+.btn-registrar:active {
+  transform: translateY(1px);
+}
+
+.btn-registrar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   Tela: Registrar Ocorrência (registrar.html)
+   ========================================================================== */
+
+/* No mobile essas divs não existem visualmente (display: contents), então
+   o empilhamento e as margens continuam exatamente como antes. No desktop
+   (ver media query no final do arquivo) elas viram as duas colunas. */
+.content-col {
+  display: contents;
+}
+
+/* Mapa ---------------------------------------------------------------------- */
+
+.map-section {
+  position: relative;
+}
+
+.map {
+  width: 100%;
+  height: 190px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-soft);
+}
+
+.map-locate-btn {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  border: none;
+  background: var(--bg-app);
+  color: var(--mocau-blue);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+}
+
+.map-locate-btn i {
+  font-size: 13px;
+}
+
+/* Localização --------------------------------------------------------------- */
+
+.location-card {
+  margin-top: 14px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.location-card__icon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: var(--radius-pill);
+  background: rgba(239, 62, 67, 0.1);
+  color: var(--mocau-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  margin-top: 2px;
+}
+
+.location-card__label {
+  margin: 0 0 2px;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.location-card__address {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.location-card__sub {
+  margin: 1px 0 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.location-card__coords {
+  margin: 6px 0 0;
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+/* Comentário ------------------------------------------------------------------ */
+
+.textarea {
+  width: 100%;
+  min-height: 84px;
+  resize: vertical;
+  border: 1px solid var(--border-color);
+  background: var(--bg-soft);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-size: 13.5px;
+  font-family: inherit;
+  color: var(--text-primary);
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--mocau-blue);
+  background: var(--bg-app);
+}
+
+.char-counter {
+  margin: 6px 2px 0;
+  text-align: right;
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+/* Anexos ------------------------------------------------------------------- */
+
+.anexos-botoes {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.anexo-btn {
+  flex: 1;
+  border: 1px dashed var(--border-color);
+  background: var(--bg-soft);
+  color: var(--text-secondary);
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 10px 8px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.anexo-btn i {
+  font-size: 14px;
+  color: var(--mocau-blue);
+}
+
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.preview-vazio {
+  grid-column: 1 / -1;
+  margin: 4px 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 0;
+}
+
+.preview-vazio i {
+  font-size: 20px;
+}
+
+.preview-item {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-color);
+}
+
+.preview-item img,
+.preview-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.preview-item__video-badge {
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.preview-item__remove {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Toast de erro --------------------------------------------------------------- */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--nav-height) + 18px);
+  transform: translateX(-50%) translateY(12px);
+  background: #2A2B2F;
+  color: #fff;
+  font-size: 13px;
+  padding: 10px 16px;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-card);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 60;
+  max-width: 88%;
+  text-align: center;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+/* Modal de confirmação -------------------------------------------------------- */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 20, 24, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 100;
+}
+
+.modal-overlay[hidden] {
+  display: none;
+}
+
+.modal-card {
+  background: var(--bg-app);
+  border-radius: var(--radius-lg);
+  padding: 28px 22px 22px;
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+}
+
+.modal-card__icon {
+  font-size: 40px;
+  color: #34B364;
+  margin-bottom: 10px;
+}
+
+.modal-card h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.modal-card__protocolo {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--mocau-blue);
+}
+
+.modal-card__msg {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+/* ==========================================================================
+   Layout Desktop (telas de monitor, a partir de 900px)
+   Mantém o mobile 100% intacto abaixo desse ponto de quebra.
+   Cabeçalho e menu de navegação continuam de ponta a ponta, exatamente
+   como no mobile (nada de barra lateral) — só crescem em escala e o
+   conteúdo passa a usar duas colunas dentro de uma largura confortável
+   de leitura, em vez do cartão estreito de celular.
+   ========================================================================== */
+
+@media (min-width: 900px) {
+
+  html, body {
+    height: 100%;
+  }
+
+  body {
+    padding: 0;
+  }
+
+  .app {
+    max-width: 100%;
+    width: 100%;
+    height: 100vh;
+    min-height: 0;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Cabeçalho, de ponta a ponta ------------------------------------------ */
+  .app-header {
+    flex: 0 0 auto;
+    height: 76px;
+    min-height: 76px;
+    padding: 0 48px;
+  }
+
+  .app-header__title {
+    font-size: 20px;
+  }
+
+  .icon-btn--back {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+  }
+
+  .icon-btn--avatar {
+    font-size: 34px;
+  }
+
+  /* Conteúdo: única área que rola, entre o header e o menu fixos --------- */
+  .app-content {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: minmax(340px, 480px) 1fr;
+    align-content: start;
+    gap: 56px;
+    max-width: 1240px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 40px 48px;
+  }
+
+  .content-col {
+    display: block;
+  }
+
+  .content-col--form {
+    max-width: 620px;
+  }
+
+  .content-col--map {
+    position: sticky;
+    top: 0;
+  }
+
+  /* Mapa e cartão de localização, em escala de monitor -------------------- */
+  .map {
+    height: 420px;
+    border-radius: 22px;
+  }
+
+  .map-locate-btn {
+    font-size: 14px;
+    padding: 11px 16px;
+  }
+
+  .location-card {
+    margin-top: 22px;
+    gap: 16px;
+  }
+
+  .location-card__icon {
+    width: 44px;
+    height: 44px;
+    font-size: 19px;
+  }
+
+  .location-card__label {
+    font-size: 13px;
+  }
+
+  .location-card__address {
+    font-size: 19px;
+  }
+
+  .location-card__sub {
+    font-size: 15px;
+  }
+
+  .location-card__coords {
+    font-size: 13px;
+  }
+
+  /* Blocos de texto e formulário ------------------------------------------ */
+  .content-col--form .block {
+    margin-top: 0;
+  }
+
+  .content-col--form .block + .block {
+    margin-top: 32px;
+  }
+
+  .block__title {
+    font-size: 16px;
+    margin-bottom: 14px;
+  }
+
+  .textarea {
+    min-height: 150px;
+    font-size: 15px;
+    padding: 14px 16px;
+    border-radius: var(--radius-md);
+  }
+
+  .char-counter {
+    font-size: 12.5px;
+  }
+
+  .anexos-botoes {
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .anexo-btn {
+    padding: 16px 12px;
+    font-size: 14px;
+    gap: 10px;
+  }
+
+  .anexo-btn i {
+    font-size: 17px;
+  }
+
+  .preview-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  .btn-registrar {
+    margin-top: 32px;
+    padding: 17px 22px;
+    font-size: 16px;
+    max-width: 360px;
+  }
+
+  /* Menu de navegação: sempre visível, fixo na base do app-shell --------- */
+  .bottom-nav {
+    position: static;
+    flex: 0 0 auto;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 88px;
+    padding: 14px 24px calc(14px + env(safe-area-inset-bottom, 0px));
+    background: var(--mocau-blue-light);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .nav-item {
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12.5px;
+  }
+
+  .nav-item i {
+    font-size: 20px;
+  }
+
+  /* No mobile o item "Registrar" vira um botão circular destacado (fab);
+     no desktop, seguindo a referência, ele fica igual aos demais itens. */
+  .nav-item--fab {
+    transform: none;
+  }
+
+  .nav-fab {
+    width: auto;
+    height: auto;
+    background: transparent;
+    color: inherit;
+    box-shadow: none;
+    font-size: 20px;
+    margin-bottom: 0;
+  }
+
+  /* Modal de confirmação, um pouco maior também --------------------------- */
+  .modal-card {
+    max-width: 400px;
+    padding: 36px 30px 28px;
+  }
+
+  .modal-card__icon {
+    font-size: 48px;
+  }
+
+  .modal-card h3 {
+    font-size: 19px;
+  }
+
+  .modal-card__protocolo,
+  .modal-card__msg {
+    font-size: 14.5px;
+  }
+}
+
+/* Telas muito largas (monitores grandes / ultrawide) ---------------------- */
+@media (min-width: 1600px) {
+  .app-content {
+    max-width: 1400px;
+    padding: 56px 64px;
+    grid-template-columns: minmax(380px, 560px) 1fr;
+    gap: 72px;
+  }
+
+  .map {
+    height: 500px;
+  }
+
+  .bottom-nav {
+    gap: 120px;
+  }
+
+  .preview-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
