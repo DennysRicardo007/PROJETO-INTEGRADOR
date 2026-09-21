@@ -45,14 +45,28 @@ body {
 
 .botao-voltar {
     text-decoration: none;
-    font-size: 28px;
-    line-height: 1;
-    color: #ff1f2d;
-    min-width: 44px;
-    min-height: 44px;
+    width: 42px;
+    height: 42px;
+    color: #0D6EFD;
+    background: transparent;
+    border-radius: 50%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+}
+
+.botao-voltar:hover {
+    background: #f2f2f2;
+}
+
+.botao-voltar svg {
+    width: 27px;
+    height: 27px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 .foto-perfil {

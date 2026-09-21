@@ -132,11 +132,6 @@ button {
 
     background: transparent;
 
-    color: #ff2525;
-
-    font-size: 1.5rem;
-    line-height: 1;
-
     border-radius: 50%;
 
     cursor: pointer;
@@ -144,7 +139,21 @@ button {
 
 .back-button:hover,
 .avatar-button:hover {
-    background: rgba(255, 37, 37, 0.08);
+    background: #f2f2f2;
+}
+
+.back-button svg {
+    width: 27px;
+    height: 27px;
+
+    fill: none;
+
+    stroke: var(--blue);
+
+    stroke-width: 2.2;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 .avatar-button img {
