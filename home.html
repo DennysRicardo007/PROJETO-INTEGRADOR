@@ -78,25 +78,25 @@
       <!-- GRID DE BOTÕES DE AÇÃO -->
       <div class="row g-2 mb-4 grid-botoes">
         <div class="col-6">
-          <a href="mapa.html" class="btn-action btn-mapa shadow-sm">
+          <a href="mapa.html" class="btn-action btn-mapa shadow-sm" data-action="mapa">
             <svg class="btn-icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4zM8 2v16M16 6v16"></path></svg>
             <span>Mapa</span>
           </a>
         </div>
         <div class="col-6">
-          <a href="registrar.html" class="btn-action btn-registrar shadow-sm">
+          <a href="registrar.html" class="btn-action btn-registrar shadow-sm" data-action="registrar">
             <svg class="btn-icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
             <span>Registrar</span>
           </a>
         </div>
         <div class="col-6">
-          <a href="historico.html" class="btn-action btn-historico shadow-sm">
+          <a href="historico.html" class="btn-action btn-historico shadow-sm" data-action="historico">
             <svg class="btn-icone" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
             <span>Histórico</span>
           </a>
         </div>
         <div class="col-6">
-          <a href="comunidade.html" class="btn-action btn-comunidade shadow-sm">
+          <a href="comunidade.html" class="btn-action btn-comunidade shadow-sm" data-action="comunidade">
             <svg class="btn-icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
             <span>Comunidade</span>
           </a>
@@ -330,6 +330,21 @@
           </article>
     </div>
 
+  </div>
+
+  <div class="modal-backdrop hidden" id="modalAcesso" aria-hidden="true">
+    <div class="modal-pop" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+      <button class="modal-close" type="button" aria-label="Fechar pop-up">×</button>
+
+      <div class="modal-icon" id="modalIcon" aria-hidden="true"></div>
+      <h3 id="modalTitulo">Acesso</h3>
+      <p id="modalDescricao">Você está prestes a abrir essa página.</p>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-modal btn-cancelar" id="cancelarModal">Cancelar</button>
+        <a href="#" class="btn-modal btn-confirmar" id="confirmarModal">Abrir página</a>
+      </div>
+    </div>
   </div>
 
   <script src="./js/home.js"></script>
