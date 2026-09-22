@@ -141,8 +141,15 @@ body {
   gap: 8px;
 }
 
-.btn-action i {
-  font-size: 28px;
+.btn-action .btn-icone {
+  width: 25px;
+  height: 25px;
+  flex: 0 0 25px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .btn-action span {
