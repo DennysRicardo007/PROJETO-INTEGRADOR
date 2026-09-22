@@ -12,7 +12,6 @@
     height: auto;
     padding: 4px 8px max(4px, env(safe-area-inset-bottom));
     background: #0D6EFD;
-    border-top: 1px solid #0D6EFD;
     border-radius: 0;
     box-shadow: none;
 }
