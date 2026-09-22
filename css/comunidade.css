@@ -169,7 +169,7 @@ body {
     position: relative;
     display: flex;
     gap: 12px;
-    align-items: flex-start;
+    align-items: center;
     margin: 0 20px 16px;
     padding: 16px;
     background: #f5f6f8;
@@ -198,7 +198,23 @@ body {
     align-items: center;
     justify-content: center;
     min-width: 0;
-} 
+    margin: 0 auto;
+}
+
+.ocorrencia-destaque__icone .icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.ocorrencia-destaque__icone img {
+    display: block;
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
 
 .ocorrencia-destaque__texto {
     display: flex;
