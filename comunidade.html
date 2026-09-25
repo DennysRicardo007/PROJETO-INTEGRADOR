@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mocau</title>
+    <style>.bottom-nav {background: #9d9d9d !important}</style>
     <link rel="stylesheet" href="./css/comunidade.css">
     <link rel="stylesheet" href="./css/navbar.css">
 </head>
@@ -12,8 +13,9 @@
     
     <header class="cabecalho">
         <button type="button" class="botao-voltar" id="botaoVoltar" aria-label="Voltar para a página anterior">
-            <!-- Ícone de seta: caractere temporário, pode ser substituído por SVG/PNG na pasta img -->
-            <span aria-hidden="true">&#8592;</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19 12H5M11 6l-6 6 6 6"></path>
+            </svg>
         </button>
         <h1 class="cabecalho__titulo">Comunidade</h1>
         <div class="cabecalho__perfil">
@@ -38,9 +40,9 @@
             <span class="selo-status selo-status--principal" id="selo-principal">Em atendimento</span>
             
             <div class="ocorrencia-destaque__icone">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="#4a90d9" id="icone-principal">
-                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
-                </svg>
+                <span class="icone falta-icone">
+                    <img id="icone-principal" src="/img/icone-falta-agua.png" alt="Falta de Água">
+                </span>
             </div>
             
             <div class="ocorrencia-destaque__texto">

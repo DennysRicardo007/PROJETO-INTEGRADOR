@@ -63,15 +63,28 @@ button {
 }
 
 .botao-voltar {
-  border: none;
-  background: none;
-  padding: 4px;
-  font-size: 26px;
-  line-height: 1;
-  color: var(--cor-destaque);
+  width: 42px;
+  height: 42px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: #0D6EFD;
   cursor: pointer;
-  min-width: 44px;
-  min-height: 44px;
+  border-radius: 50%;
+}
+
+.botao-voltar:hover {
+  background: #f2f2f2;
+}
+
+.botao-voltar svg {
+  width: 27px;
+  height: 27px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .titulo-cabecalho {
