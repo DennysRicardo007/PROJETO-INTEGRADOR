@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acessar o Mocau</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #1678d4;
+      --ink: #15263d;
+      --muted: #667487;
+      --line: #dce7f0;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      color: var(--ink);
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #d8edf8 0%, #f7fbfd 52%, #e7f3f8 100%);
+    }
+
+    .access-card {
+      width: min(100%, 420px);
+      padding: 36px 28px 30px;
+      text-align: center;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 14px 34px rgba(35, 76, 105, .12);
+    }
+
+    .logo {
+      width: 150px;
+      height: auto;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.45rem, 5vw, 1.9rem);
+      line-height: 1.2;
+    }
+
+    .description {
+      margin: 0 auto 26px;
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.55;
+    }
+
+    .actions {
+      display: grid;
+      gap: 12px;
+    }
+
+    .action {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      border: 1px solid var(--blue);
+      color: var(--blue);
+      font-size: .92rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .action.primary {
+      color: #fff;
+      background: var(--blue);
+    }
+
+    .action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(22, 120, 212, .2);
+    }
+  </style>
+</head>
+<body>
+  <main class="access-card" aria-labelledby="titulo-acesso">
+    <img class="logo" src="img/logo_MOCAL.png" alt="Logo MOCAU">
+    <h1 id="titulo-acesso">Como deseja continuar?</h1>
+    <p class="description">Entre na sua conta ou crie um cadastro para acessar o aplicativo.</p>
+    <div class="actions">
+      <a class="action primary" href="login.html">Entrar</a>
+      <a class="action" href="cadastro.html">Criar uma conta</a>
+    </div>
+  </main>
+</body>
+</html>
