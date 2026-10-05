@@ -8,14 +8,14 @@
 }
 
 :root {
-    --blue: #0D6EFD;
-    --blue-dark: #0B5ED7;
-    --filter-blue: #0D6EFD;
-    --blue-light: #E7F2FD;
+    --blue: #f5a623;
+    --blue-dark: #f09b13;
+    --filter-blue: #f09b13;
+    --blue-light: #f09b13;
 
     --prototype-bg: #FFFFFF;
     --prototype-card: #F5F5F5;
-    --prototype-nav: #0D6EFD;
+    --prototype-nav: #f09b13;
 
     --text: #242629;
     --muted: #666666;
@@ -75,11 +75,13 @@ button {
     width: 100%;
     min-height: 100vh;
 
-    margin: 0;
+    margin: 0 auto;
 
     padding: 24px 5% 115px;
-    max-width: 1100px;
-    margin: 0 auto;
+
+    max-width: 3040px;
+
+    box-sizing: border-box;
 }
 
 
@@ -97,9 +99,12 @@ button {
     gap: 10px;
 
     width: 100%;
+
     min-height: 48px;
 
     margin-bottom: 24px;
+
+    box-sizing: border-box;
 }
 
 .page-header h1 {
@@ -108,11 +113,11 @@ button {
     text-align: center;
 
     font-size: clamp(18px, 2.5vw, 24px);
+
     font-weight: 800;
 
     line-height: 1.2;
 }
-
 
 /* =========================================================
    BOTÃO VOLTAR / AVATAR

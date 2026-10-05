@@ -57,15 +57,13 @@ body {
 }
 
 .botao-voltar {
-  background: none;
-  border: none;
-  color: var(--cor-vermelho);
-  font-size: 1.5rem;
-  line-height: 1;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  color: #0D6EFD;
   cursor: pointer;
-  padding: 8px;
-  min-width: 44px;
-  min-height: 44px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -73,7 +71,17 @@ body {
 }
 
 .botao-voltar:hover {
-  background-color: rgba(255, 37, 37, 0.08);
+  background-color: #f2f2f2;
+}
+
+.botao-voltar svg {
+  width: 27px;
+  height: 27px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .botao-voltar:focus-visible {

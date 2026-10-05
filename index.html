@@ -3,83 +3,465 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mocau</title>
+  <title>Bem-vindo ao Mocau</title>
 
   <!-- Google Fonts: Poppins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Bootstrap 5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Bootstrap Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-
   <style>
+    :root {
+      --blue: #1678d4;
+      --ink: #15263d;
+      --muted: #667487;
+      --line: #dce7f0;
+      --surface: #ffffff;
+      --wash: #eef6fb;
+    }
+
+    * { box-sizing: border-box; }
+
     body {
       font-family: 'Poppins', sans-serif;
+      margin: 0;
       background: #ffffff;
       min-height: 100vh;
+      color: var(--ink);
     }
 
-    /* Container com proporção de App Mobile */
-    .intro-card {
-      width: 100%;
-      max-width: 420px;
-      border: none;
-      border-radius: 24px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      background-color: #ffffff;
+    .tutorial {
+      position: relative;
+      width: min(100%, 980px);
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: clamp(24px, 5vw, 72px) clamp(20px, 6vw, 84px);
+      display: grid;
+      align-content: center;
+      gap: 28px;
     }
+
+    .tutorial.is-running {
+      width: min(100%, 520px);
+      align-content: center;
+      background: #ffffff;
+    }
+
+    .tutorial.is-running .welcome { display: none; }
+    .tutorial.is-running > .skip-link { display: none; }
+
+    .home-preview {
+      display: none;
+    }
+
+    .tutorial.is-running .home-preview {
+      display: none;
+    }
+
+    .preview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 800;
+      font-size: .9rem;
+    }
+
+    .preview-menu { font-size: 1.3rem; }
+    .preview-avatar { width: 27px; height: 27px; border-radius: 50%; background: #4a3025; }
+
+    .preview-greeting {
+      margin: 12px 0;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .preview-banner {
+      height: 62px;
+      padding: 11px;
+      border-radius: 12px;
+      background: #7f9ecb;
+      font-size: .58rem;
+    }
+
+    .preview-actions {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .preview-actions span {
+      height: 76px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: #34c165;
+      font-size: .72rem;
+      font-weight: 700;
+    }
+
+    .preview-actions span:nth-child(2) { background: #2fa9f0; }
+    .preview-actions span:nth-child(3) { background: #f5a623; }
+    .preview-actions span:nth-child(4) { background: #dceaff; }
+
+    .preview-title {
+      margin-top: 18px;
+      font-size: .95rem;
+      font-weight: 800;
+    }
+
+    .preview-row {
+      height: 46px;
+      margin-top: 8px;
+      border-radius: 9px;
+      background: rgba(255, 255, 255, .58);
+    }
+
+    .welcome {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.8fr) minmax(280px, 1.2fr);
+      align-items: center;
+      gap: clamp(28px, 7vw, 90px);
+    }
+
+    .brand-area { text-align: center; }
 
     .logo-img {
-      max-width: 150px;
+      width: min(100%, 220px);
       height: auto;
       object-fit: contain;
+      margin-bottom: 20px;
     }
 
-    /* Botões personalizados */
-    .btn-custom {
+    h1, h2, p { margin-top: 0; }
+
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 2.7rem);
+      margin-bottom: 10px;
+      line-height: 1.12;
+    }
+
+    .intro-copy {
+      max-width: 430px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 26px;
+    }
+
+    .start-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 24px;
+      border: 0;
+      border-radius: 10px;
+      background: var(--blue);
+      color: #fff;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .start-button:hover {
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(22, 120, 212, .22);
+    }
+
+    .skip-link {
+      position: absolute;
+      top: 24px;
+      right: clamp(20px, 6vw, 84px);
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 6px 12px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--muted);
+      font-size: .82rem;
+      text-decoration: none;
+    }
+
+    .skip-link:hover { color: var(--blue); text-decoration: underline; }
+
+    .steps {
+      display: none;
+      max-width: 430px;
+      margin: 0 auto;
+    }
+
+    .steps.is-visible { display: block; }
+
+    .tutorial.is-running .steps {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 430px);
+    }
+
+    .step {
+      display: none;
+      border: 1px solid var(--line);
       border-radius: 12px;
-      padding: 12px 20px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: all 0.2s ease-in-out;
+      background: var(--surface);
+      padding: 16px;
+      min-height: 190px;
+      flex-direction: column;
+      gap: 9px;
+      box-shadow: 0 7px 20px rgba(35, 76, 105, .08);
     }
 
-    .btn-custom:active {
-      transform: scale(0.98);
+    .step.is-active { display: flex; }
+
+    .step.is-active {
+      animation: screenIn .28s ease both;
+    }
+
+    @keyframes screenIn {
+      from { opacity: 0; transform: translateX(14px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .step-number {
+      color: var(--blue);
+      font-size: .76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .progress-dots {
+      display: flex;
+      justify-content: flex-end;
+      gap: 5px;
+      margin: -3px 0 5px;
+    }
+
+    .progress-dots span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #d4dce5;
+    }
+
+    .progress-dots span.active { background: var(--blue); }
+
+    .step h2 { font-size: 1rem; margin-bottom: 0; }
+    .step p { color: var(--muted); font-size: .82rem; line-height: 1.45; flex: 1; margin-bottom: 0; }
+    .feature-icon {
+      width: 100%;
+      min-height: 112px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px;
+      border-radius: 16px;
+      background: #2fa9f0;
+      color: #06304a;
+    }
+
+    .feature-icon svg {
+      width: 48px;
+      height: 48px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .feature-icon span {
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    .step-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .step-actions button {
+      flex: 1;
+      min-height: 38px;
+      border: 0;
+      border-radius: 10px;
+      background: var(--wash);
+      color: var(--blue);
+      font-size: .82rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .step-actions .next-step { background: var(--blue); color: #fff; }
+
+    .step-actions .skip-step {
+      flex: 1;
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 10px;
+      background: var(--wash);
+      color: var(--muted);
+      font-size: .82rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .step[data-color="green"] .feature-icon { background: #34c165; color: #063d13; }
+    .step[data-color="orange"] .feature-icon { background: #f5a623; color: #4a2e00; }
+    .step[data-color="slate"] .feature-icon { background: #dceaff; color: #10233d; }
+
+    .tutorial-note {
+      display: none;
+      color: var(--muted);
+      text-align: center;
+      font-size: .85rem;
+    }
+
+    .tutorial-note.is-visible { display: block; }
+
+    @media (max-width: 680px) {
+      .tutorial { align-content: start; padding-top: 48px; }
+      .welcome { grid-template-columns: 1fr; gap: 14px; }
+      .brand-area { order: 0; }
+      .intro { text-align: center; }
+      .intro-copy { margin-inline: auto; }
+      .start-button { width: 100%; }
+      .step { min-height: 0; }
     }
   </style>
 </head>
-<body class="d-flex align-items-center justify-content-center p-3">
+<body>
+  <main class="tutorial" id="tutorial">
+    <a class="skip-link" href="acesso.html">Pular tutorial</a>
+    <section class="welcome" aria-labelledby="titulo-boas-vindas">
+      <div class="brand-area">
+        <img src="img/logo_MOCAL.png" alt="Logo MOCAU" class="logo-img">
+      </div>
+      <div class="intro">
+        <h1 id="titulo-boas-vindas">Bem-vindo ao Mocau!</h1>
+        <p class="intro-copy">Faça parte da sua comunidade, registre problemas e acompanhe as ocorrências perto de você.</p>
+        <button class="start-button" type="button" id="iniciar-tutorial">Vamos começar!</button>
+      </div>
+    </section>
 
-  <div class="card intro-card p-4 p-sm-5 text-center">
-    
-    <!-- ÁREA DE LOGO E MENSAGEM -->
-    <div class="mb-4">
-      <img src="/img/logo_MOCAL.png" alt="Logo MOCAU" class="logo-img mb-4 img-fluid">
-      
-      <h1 class="h4 fw-bold text-dark mb-2">Boas-vindas!</h1>
-      <p class="text-muted small mb-0">Faça login ou crie uma conta para começar a usar o aplicativo.</p>
+    <div class="home-preview" aria-hidden="true">
+      <div class="preview-header"><span class="preview-menu">☰</span><span>MOCAU</span><span class="preview-avatar"></span></div>
+      <div class="preview-greeting">Olá, Marta</div>
+      <div class="preview-banner"><strong>Sua Comunidade:</strong><br>Rua Açuper - Alto Santa Terezinha, 131</div>
+      <div class="preview-actions"><span>＋</span><span>Mapa</span><span>Histórico</span><span>Comunidade</span></div>
+      <div class="preview-title">Ocorrências perto de você</div>
+      <div class="preview-row"></div>
+      <div class="preview-row"></div>
+      <div class="preview-row"></div>
     </div>
 
-    <!-- BOTÕES DE AÇÃO -->
-    <div class="d-grid gap-3">
-      <a href="login.html" class="btn btn-primary btn-custom d-flex align-items-center justify-content-center gap-2 shadow-sm">
-        <i class="bi bi-box-arrow-in-right fs-5"></i>
-        <span>Login</span>
-      </a>
-      
-      <a href="cadastro.html" class="btn btn-outline-primary btn-custom d-flex align-items-center justify-content-center gap-2">
-        <i class="bi bi-person-plus fs-5"></i>
-        <span>Cadastrar</span>
-      </a>
-    </div>
+    <section class="steps" id="passos-tutorial" aria-label="Tutorial do Mocau">
+      <article class="step is-active">
+        <span class="step-number">Passo 1 de 4</span>
+        <div class="progress-dots" aria-label="Passo 1 de 4"><span class="active"></span><span></span><span></span><span></span></div>
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg>
+          <span>Registrar</span>
+        </div>
+        <h2>Registre sua ocorrência</h2>
+        <p>Informe um problema de água, esgoto ou limpeza para ajudar sua comunidade.</p>
+        <div class="step-actions">
+          <a class="skip-step" href="acesso.html">Pular tutorial</a>
+          <button type="button" class="next-step">Próximo</button>
+        </div>
+      </article>
+      <article class="step" data-color="green">
+        <span class="step-number">Passo 2 de 4</span>
+        <div class="progress-dots" aria-label="Passo 2 de 4"><span></span><span class="active"></span><span></span><span></span></div>
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4zM8 2v16M16 6v16"></path></svg>
+          <span>Mapa</span>
+        </div>
+        <h2>Use o mapa</h2>
+        <p>Localize sua comunidade e veja as ocorrências registradas na região.</p>
+        <div class="step-actions">
+          <button type="button" class="previous-step">Anterior</button>
+          <button type="button" class="next-step">Próximo</button>
+        </div>
+      </article>
+      <article class="step" data-color="orange">
+        <span class="step-number">Passo 3 de 4</span>
+        <div class="progress-dots" aria-label="Passo 3 de 4"><span></span><span></span><span class="active"></span><span></span></div>
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <span>Histórico</span>
+        </div>
+        <h2>Acesse o histórico</h2>
+        <p>Acompanhe os registros feitos por você e veja o andamento de cada caso.</p>
+        <div class="step-actions">
+          <button type="button" class="previous-step">Anterior</button>
+          <button type="button" class="next-step">Próximo</button>
+        </div>
+      </article>
+      <article class="step" data-color="slate">
+        <span class="step-number">Passo 4 de 4</span>
+        <div class="progress-dots" aria-label="Passo 4 de 4"><span></span><span></span><span></span><span class="active"></span></div>
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          <span>Comunidade</span>
+        </div>
+        <h2>Conecte-se à comunidade</h2>
+        <p>Confira atualizações e converse sobre os problemas do seu bairro.</p>
+        <div class="step-actions">
+          <button type="button" class="previous-step">Anterior</button>
+          <button type="button" class="next-step">Finalizar</button>
+        </div>
+      </article>
+    </section>
+    <p class="tutorial-note" id="nota-tutorial">Escolha uma opção para começar.</p>
+  </main>
+  <script>
+    const iniciarTutorial = document.getElementById('iniciar-tutorial');
+    const tutorial = document.getElementById('tutorial');
+    const passosTutorial = document.getElementById('passos-tutorial');
+    const notaTutorial = document.getElementById('nota-tutorial');
 
-  </div>
+    const passos = [...document.querySelectorAll('.step')];
+    const botoesProximo = document.querySelectorAll('.next-step');
+    const botoesAnterior = document.querySelectorAll('.previous-step');
+    let passoAtual = 0;
 
-  <!-- Bootstrap 5 JavaScript Bundle -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    function mostrarPasso(indice) {
+      passoAtual = indice;
+      passos.forEach((passo, passoIndice) => {
+        passo.classList.toggle('is-active', passoIndice === passoAtual);
+      });
+    }
+
+    iniciarTutorial.addEventListener('click', () => {
+      tutorial.classList.add('is-running');
+      passosTutorial.classList.add('is-visible');
+      notaTutorial.classList.add('is-visible');
+      iniciarTutorial.textContent = 'Tutorial em andamento';
+      iniciarTutorial.disabled = true;
+      passosTutorial.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    botoesProximo.forEach((botao) => {
+      botao.addEventListener('click', () => {
+        if (passoAtual < passos.length - 1) mostrarPasso(passoAtual + 1);
+        else window.location.href = 'acesso.html';
+      });
+    });
+
+    botoesAnterior.forEach((botao) => {
+      botao.addEventListener('click', () => mostrarPasso(Math.max(0, passoAtual - 1)));
+    });
+  </script>
 </body>
 </html>
