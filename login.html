@@ -141,9 +141,9 @@
         <label for="senha" class="form-label small fw-medium text-secondary">Senha</label>
         <div class="input-group">
           <input type="password" class="form-control" id="senha" name="senha" placeholder="Digite sua senha" required>
-          <span class="input-group-text">
-            <i class="fa-regular fa-eye"></i>
-          </span>
+          <button type="button" class="input-group-text" id="toggle-password" aria-label="Mostrar senha" aria-pressed="false">
+            <i class="fa-regular fa-eye" aria-hidden="true"></i>
+          </button>
         </div>
       </div>
 
@@ -177,5 +177,19 @@
 
   <!-- Bootstrap 5 JavaScript Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const senha = document.getElementById('senha');
+    const botaoMostrarSenha = document.getElementById('toggle-password');
+    const iconeSenha = botaoMostrarSenha.querySelector('i');
+
+    botaoMostrarSenha.addEventListener('click', () => {
+      const mostrarSenha = senha.type === 'password';
+      senha.type = mostrarSenha ? 'text' : 'password';
+      botaoMostrarSenha.setAttribute('aria-label', mostrarSenha ? 'Ocultar senha' : 'Mostrar senha');
+      botaoMostrarSenha.setAttribute('aria-pressed', String(mostrarSenha));
+      iconeSenha.classList.toggle('fa-eye', !mostrarSenha);
+      iconeSenha.classList.toggle('fa-eye-slash', mostrarSenha);
+    });
+  </script>
 </body>
 </html>
